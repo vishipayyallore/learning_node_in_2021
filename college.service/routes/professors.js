@@ -2,18 +2,41 @@ const express = require('express');
 const router = express.Router();
 const ProfessorDto = require('../models/professorDto');
 
-router.get('/', (req, res) => {
-    res.send('Professors default route.');
-});
-
-router.get('/list', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const professors = await ProfessorDto.find();
 
         res.status(200)
             .json(professors);
     } catch (error) {
-        console.error(`Professors::Post V2 Unable to process the request ${error}`);
+        console.error(`Professors::GetAll Unable to process the request ${error}`);
+        res.status(500)
+            .json({ message: error });
+    }
+});
+
+router.get('/:professorId', async (req, res) => {
+    try {
+        const professorIdentifier = req.params.professorId;
+        console.log(`Professor Id Received: ${professorIdentifier}`);
+
+        await ProfessorDto.find()
+            .where({ professorId: professorIdentifier })
+            .exec()
+            .then(professor => {
+                if (professor.professorId) {
+                    // console.log(`Value of Professor: ${professor}`);
+
+                    res.status(200)
+                        .json(professor);
+                } else {
+                    res.status(404)
+                        .json({});
+                }
+            });
+
+    } catch (error) {
+        console.error(`Professors::ProfessorId Unable to process the request ${error}`);
         res.status(500)
             .json({ message: error });
     }
@@ -36,7 +59,7 @@ router.post('/', (req, res) => {
                 .json(data);
         })
         .catch(error => {
-            console.error(`Professors::Post V2 Unable to process the request ${error}`);
+            console.error(`Professors::Post V1 Unable to process the request ${error}`);
             res.status(500)
                 .json({ message: error });
         });
