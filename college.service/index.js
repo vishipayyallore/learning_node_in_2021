@@ -1,8 +1,11 @@
-const express = require('express')
-const mongoose = require('mongoose')
-require('dotenv/config')
-
+const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+require('dotenv/config');
+
+// Import Routes
+const professorsRoute = require('./routes/professors');
+const studentsRoute = require('./routes/students');
 
 var logger = function (req, res, next) {
     console.log(`Middleware will be always execute when user reaches the /professors route ${new Date().toISOString()}`);
@@ -10,20 +13,9 @@ var logger = function (req, res, next) {
 }
 
 // Middleware (Executes the function)
+app.use('/professors', professorsRoute);
 app.use('/professors', (logger));
-
-// Routes
-app.get('/', (req, res) => {
-    res.send('Hello NodeJS. This is my first Web API.');
-});
-
-app.get('/professors', (req, res) => {
-    res.send('List of Professors.');
-});
-
-app.get('/students', (req, res) => {
-    res.send('List of Students.');
-});
+app.use('/students', studentsRoute);
 
 // Connecting to the MongoDb Local Instance
 mongoose.connect(process.env.MongoDbConnection, { 
@@ -32,4 +24,4 @@ mongoose.connect(process.env.MongoDbConnection, {
 });
 
 // Listen to the server
-app.listen(3000);
+app.listen(3010);
