@@ -7,14 +7,8 @@ require('dotenv/config');
 const professorsRoute = require('./routes/professors');
 const studentsRoute = require('./routes/students');
 
-var logger = function (req, res, next) {
-    console.log(`Middleware will be always execute when user reaches the /professors route ${new Date().toISOString()}`);
-    next();
-}
-
-// Middleware (Executes the function)
+// Middleware (To Import Routes)
 app.use('/professors', professorsRoute);
-app.use('/professors', (logger));
 app.use('/students', studentsRoute);
 
 // Connecting to the MongoDb Local Instance
