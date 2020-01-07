@@ -1,4 +1,6 @@
 const express = require('express')
+const mongoose = require('mongoose')
+require('dotenv/config')
 
 const app = express();
 
@@ -21,6 +23,12 @@ app.get('/professors', (req, res) => {
 
 app.get('/students', (req, res) => {
     res.send('List of Students.');
+});
+
+// Connecting to the MongoDb Local Instance
+mongoose.connect(process.env.MongoDbConnection, { 
+    useNewUrlParser: true, useUnifiedTopology: true }, () => {
+    console.log('Connected to local MongoDb');
 });
 
 // Listen to the server
