@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+var isEmpty = require('is-empty');
 const ProfessorDto = require('../models/professorDto');
 
 router.get('/', async (req, res) => {
@@ -20,20 +21,16 @@ router.get('/:professorId', async (req, res) => {
         const professorIdentifier = req.params.professorId;
         console.log(`Professor Id Received: ${professorIdentifier}`);
 
-        await ProfessorDto.find()
-            .where({ professorId: professorIdentifier })
-            .exec()
-            .then(professor => {
-                if (professor.professorId) {
-                    // console.log(`Value of Professor: ${professor}`);
+        const professor = await ProfessorDto.find({ professorId: professorIdentifier });
 
-                    res.status(200)
-                        .json(professor);
-                } else {
-                    res.status(404)
-                        .json({});
-                }
-            });
+        if (!isEmpty(professor)) {
+            console.log(`Value of Professor: ${professor}`);
+            res.status(200)
+                .json(professor);
+        } else {
+            res.status(404)
+                .json({});
+        }
 
     } catch (error) {
         console.error(`Professors::ProfessorId Unable to process the request ${error}`);
