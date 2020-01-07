@@ -16,7 +16,9 @@ router.post('/', (req, res) => {
 
     const professor = new ProfessorDto({
         professorId: req.body.professorId,
-        date: req.body.date
+        date: req.body.date,
+        name: req.body.name,
+        description: req.body.description
     });
 
     professor
@@ -27,7 +29,8 @@ router.post('/', (req, res) => {
         })
         .catch(error => {
             console.error('Unable to process the request');
-            res.json({message: error});
+            res.status(500)
+                .json({message: error});
         });
 
 });
