@@ -11,7 +11,6 @@ router.get('/list', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    // console.log(`Input Received ${req.body}`);
     console.log(req.body);
 
     const professor = new ProfessorDto({
@@ -30,8 +29,30 @@ router.post('/', (req, res) => {
         .catch(error => {
             console.error('Unable to process the request');
             res.status(500)
-                .json({message: error});
+                .json({ message: error });
         });
+
+});
+
+router.post('/v2', async (req, res) => {
+    console.log(req.body);
+
+    const professor = new ProfessorDto({
+        professorId: req.body.professorId,
+        date: req.body.date,
+        name: req.body.name,
+        description: req.body.description
+    });
+
+    try {
+        const newProfessor = await professor.save();
+        res.status(200)
+            .json(newProfessor);
+    } catch (error) {
+        console.error(`Professors::Post V2 Unable to process the request ${error}`);
+        res.status(500)
+            .json({ message: error });
+    }
 
 });
 
