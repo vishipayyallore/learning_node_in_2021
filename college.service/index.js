@@ -25,5 +25,9 @@ mongoose.connect(process.env.MongoDbConnection, {
     console.log('Connected to local MongoDb');
 });
 
+console.log(`Env Port: ${process.env.PORT}`);
+var port = process.env.PORT || 3000;
+
 // Listen to the server
-app.listen(3010);
+app.listen(port);
+console.log(`Server Listening at port ${port}`);
