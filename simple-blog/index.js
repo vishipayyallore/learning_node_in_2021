@@ -3,17 +3,11 @@ const fs = require('fs');
 
 const webApplication = http.createServer((request, response) => { 
 
-    fs.readFileSync('./home/index.html', function(error, data) {
-        if(error){
-            console.log(`File Not Found`);
-        } else {
-            console.log(`File Found`);
-        }
-    });
-
+    const homePage = fs.readFileSync('index.html')
 
     response.statusCode = 200;
-    response.write(`<h1>Hello Node !!!</h1> Request Received at: <a href='${request.url}'>${request.url}</a>`);
+    // response.write(`<h1>Hello Node !!!</h1> Request Received at: <a href='${request.url}'>${request.url}</a>`);
+    response.write(homePage);
     response.end();
 });
 
