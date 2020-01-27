@@ -1,9 +1,15 @@
 const http = require('http');
 const fs = require('fs');
 
+const indexFileName = 'index.html';
+
 const webApplication = http.createServer((request, response) => { 
 
-    const homePage = fs.readFileSync('index.html')
+    const homePage = fs.readFileSync(indexFileName)
+
+    fs.readFile(indexFileName, 'utf8', function(err, contents) {
+        console.log(contents);
+    });
 
     response.statusCode = 200;
     // response.write(`<h1>Hello Node !!!</h1> Request Received at: <a href='${request.url}'>${request.url}</a>`);
