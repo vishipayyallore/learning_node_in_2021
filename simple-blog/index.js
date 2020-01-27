@@ -7,4 +7,6 @@ const webApplication = http.createServer((request, response) => {
 });
 
 var port = process.env.PORT || 8080;
+console.log(`Web Application is listening on ${port}. http://localhost:${port}`);
+
 webApplication.listen(port);
