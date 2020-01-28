@@ -16,15 +16,14 @@ const webApplication = http.createServer((request, response) => {
 });
 
 function readFileContents(fileName, response) {
-    fs.readFile(fileName, 'utf8', function (err, contents) {
+    fs.readFile(fileName, 'utf8', (err, contents) => {
         if (err) {
             console.log(err);
             response.statusCode = 404;
-            response.write(`${fileName} not found`);
+            response.write(`File not found`);
         } else {
             response.statusCode = 200;
             response.write(contents);
-            // console.log(contents);
         }
         response.end();
     });
@@ -34,25 +33,5 @@ var port = process.env.PORT || 8090;
 
 webApplication.listen(port, () => {
     console.log(`process.env.PORT: ${process.env.PORT}`);
-    console.log(`Web Application is listening on ${port}. http://localhost:${port}`);
+    console.log(`Web Application is listening on ${port}. Click http://localhost:${port} to view the application.`);
 });
-
-
-
-
-/*
-const homePage = fs.readFileSync(indexFileName)
-
-//readFileContents('index1.html');
-fs.readFile(indexFileName, 'utf8', function(err, contents) {
-    console.log(contents);
-});
-*/
-
-    // const data = readFileContents(indexFileName, response);
-    // console.log(`Output: ${data}`);
-
-    // response.statusCode = 200;
-    // response.write(`<h1>Hello Node !!!</h1> Request Received at: <a href='${request.url}'>${request.url}</a>`);
-    // response.write(homePage);
-    // response.end();

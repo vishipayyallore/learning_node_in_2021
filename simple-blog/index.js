@@ -1,35 +1,30 @@
-const http = require('http');
-const fs = require('fs');
+const express = require('express');
 const path = require('path');
 
-const indexFileName = 'home/index.html';
-const contactUsFileName = 'contactUs/contactUs.html';
-const fileNotFound = 'shared/Htmls/FileNotFound.html';
+const webApplication = express();
 
-const webApplication = http.createServer((request, response) => {
-    if (request.url === '/home' || request.url === '/') {
-        readFileContents(indexFileName, response);
-    } else if (request.url === '/contactus') {
-        readFileContents(contactUsFileName, response);
-    } else {
-        readFileContents(fileNotFound, response);
-    }
+// *************** ROUTES ***************************
+
+webApplication.get(['/', '/home'], (request, response) => {
+    response.sendFile(path.resolve(__dirname, 'home', 'index.html'));
 });
 
-function readFileContents(fileName, response) {
-    fs.readFile(fileName, 'utf8', function (err, contents) {
-        if (err) {
-            console.log(err);
-            response.statusCode = 404;
-            response.write(`${fileName} not found`);
-        } else {
-            response.statusCode = 200;
-            response.write(contents);
-            // console.log(contents);
-        }
-        response.end();
+webApplication.get('/contactus', (request, response) => {
+    response.sendFile(path.resolve(__dirname, 'contactUs', 'contactUs.html'));
+});
+
+webApplication.get('/api/person', (request, response) => {
+    response.json({
+        employeeId: 'A101',
+        name: 'Shiva Sai',
+        isPhd: true
     });
-}
+});
+
+webApplication.get('/*', (request, response) => {
+    response.sendFile(path.resolve(__dirname, 'shared', 'Htmls', 'FileNotFound.html'));
+});
+// *************** ROUTES ***************************
 
 var port = process.env.PORT || 8080;
 
