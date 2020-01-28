@@ -1,9 +1,10 @@
 const http = require('http');
 const fs = require('fs');
+const path = require('path');
 
 const indexFileName = 'home/index.html';
 const contactUsFileName = 'contactUs/contactUs.html';
-const fileNotFound = 'shared/FileNotFound.html';
+const fileNotFound = 'shared/Htmls/FileNotFound.html';
 
 const webApplication = http.createServer((request, response) => {
     if (request.url === '/home' || request.url === '/') {
@@ -33,6 +34,8 @@ function readFileContents(fileName, response) {
 var port = process.env.PORT || 8080;
 
 webApplication.listen(port, () => {
+    console.log(`Directory: ${__dirname}`);
+    console.log(`Path Resolve: ${path.resolve(__dirname, 'home', 'index.html')}`);
     console.log(`process.env.PORT: ${process.env.PORT}`);
     console.log(`Web Application is listening on ${port}. http://localhost:${port}`);
 });

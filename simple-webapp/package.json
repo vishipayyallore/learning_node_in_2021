@@ -1,5 +1,5 @@
 {
-  "name": "simple-blog",
+  "name": "simple-webapp",
   "version": "1.0.1",
   "description": "Simple Web Application using NodeJS",
   "main": "index.js",
