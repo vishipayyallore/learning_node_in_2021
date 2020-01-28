@@ -1,7 +1,7 @@
 {
   "name": "simple-blog",
   "version": "1.0.1",
-  "description": "Simple Blog Application using NodeJS",
+  "description": "Simple Web Application using NodeJS",
   "main": "index.js",
   "scripts": {
     "start": "nodemon"
