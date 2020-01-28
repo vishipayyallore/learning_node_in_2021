@@ -21,13 +21,12 @@ function readFileContents(fileName, response) {
             console.log(err);
             response.statusCode = 404;
             response.write(`${fileName} not found`);
-            response.end();
         } else {
             response.statusCode = 200;
             response.write(contents);
-            response.end();
             // console.log(contents);
         }
+        response.end();
     });
 }
 
