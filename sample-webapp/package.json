@@ -4,7 +4,7 @@
   "description": "Sample Web Application using Node Plus Express",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon"
+    "start": "nodemon"
   },
   "author": "Viswanatha Swamy",
   "license": "ISC",
