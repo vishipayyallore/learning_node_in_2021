@@ -3,6 +3,10 @@ const path = require('path');
 
 const webApplication = express();
 
+// *************** MIDDLEWARE ***************************
+webApplication.use(express.static('shared'));
+// *************** MIDDLEWARE ***************************
+
 // *************** ROUTES ***************************
 webApplication.get(['/', '/home'], (request, response) => {
     response.sendFile(path.resolve(__dirname, 'home', 'index.html'));
