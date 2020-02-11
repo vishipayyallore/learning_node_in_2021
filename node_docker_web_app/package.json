@@ -2,13 +2,16 @@
   "name": "node_docker_web_app",
   "version": "1.0.1",
   "description": "This is Sample Node JS Application which will be hosted in Docker",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon"
   },
   "author": "Viswanatha Swamy",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
