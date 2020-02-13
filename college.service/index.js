@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 mongoose.connect(process.env.MongoDbConnection, { 
     useNewUrlParser: true, useUnifiedTopology: true }, (error) => {
         if(error) {
-            console.log(`Error Connecting to Cloud MongoDb`);
+            console.log(`Error Connecting to Cloud MongoDb ${error}`); 
         } else {
             console.log('Connected to MongoDb in Cloud');
         }
