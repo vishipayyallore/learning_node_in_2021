@@ -1,35 +1,25 @@
-'use strict';
-
 const mongoose = require('mongoose');
 const { uuid } = require('uuidv4');
 
 const AddressBookSchema = mongoose.Schema({
-    Id: { 
-        type: String, 
-        trim: true,
-        default: uuid 
-    },
     name: {
         type: String,
+        trim: true,
         required: true
     },
     email: {
         type: String,
-        required: true
+        trim: true
     },
-    gender: {
-        type: String
-    },
-    phone: {
-        type: String
+    pincode: {
+        type: String,
+        trim: true
     },
     address: {
-        type: String
-    },
-    createdDate: {
-        type: Date,
-        default: Date.now
+        type: String,
+        trim: true
     }
 });
 
 module.exports = mongoose.model('AddressBook', AddressBookSchema);
+

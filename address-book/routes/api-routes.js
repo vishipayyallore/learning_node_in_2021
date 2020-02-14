@@ -16,7 +16,7 @@ const addressBookRoutes = require('../controllers/addressBookController');
 
 // Address Book Routes 
 router.route('/addressbook')
-        .get(addressBookRoutes.get);
+        .get(addressBookRoutes.getaddresses);
 
 // Export API Routes
 module.exports = router;

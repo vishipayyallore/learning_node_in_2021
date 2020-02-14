@@ -1,15 +1,19 @@
 'use strict';
 
-const AddressBookDto = require('../models/addressBookDto');
+const ProfessorDto = require('../models/professorDto');
 
-exports.get = function (request, response) {
+exports.getaddresses = function (request, response) {
     try {
-        const addresses = AddressBookDto.find();
+        console.log('Entered the method.')
+        const addresses = ProfessorDto.find({});
 
-        console.log(addresses);
+        console.log(JSON.stringify(addresses));
 
         response.status(200)
-                .json(addresses);
+                .json({
+                    name: 'Node Web API',
+                    description: 'Default Routes'
+                });
 
     } catch (error) {
         console.error(`Error at AddressBook::Get() Unable to process the request ${error}`);

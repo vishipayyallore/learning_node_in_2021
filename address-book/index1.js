@@ -1,22 +1,26 @@
+'use strict';
+
 const express = require('express');
-const app = express();
+const webApi = express();
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 require('dotenv/config');
 
-app.use(bodyParser.json());
+// Adding Middleware
+webApi.use(bodyParser.urlencoded({
+    extended: true
+}));
+webApi.use(bodyParser.json());
 
-// Import Routes
-const professorsRoute = require('./routes/professors');
-const addressRoute = require('./routes/addresses');
+// Importing the Routes
+const apiRoutes = require('./routes/api-routes');
 
-// Middleware (To Import Routes)
-app.use('/professors', professorsRoute);
-app.use('/api/address', addressRoute);
+// Adding API Routes
+webApi.use('/api', apiRoutes);
 
-// Routes
-app.get('/', (req, res) => {
-    res.send('NodeJS express Web API connecting to MongoDb.');
+// Default Routes
+webApi.get('/', (request, response) => {
+    response.send('NodeJS express Web API connecting to Atlas MongoDb.');
 });
 
 // Connecting to the MongoDb Cloud Instance
@@ -30,11 +34,8 @@ mongoose.connect(process.env.MongoDbConnection, {
     }
 });
 
-var port = process.env.PORT || 3060;
-
-// Listen to the server
-app.listen(port, () => {
+const port = process.env.PORT || 3020;
+webApi.listen(port, () => {
     console.log(`Env Port: ${process.env.PORT}`);
     console.log(`Server Listening at port ${port}. http://localhost:${port}`);
 });
-
