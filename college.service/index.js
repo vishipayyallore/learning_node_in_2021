@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
     res.send('NodeJS express Web API connecting to MongoDb.');
 });
 
-// Connecting to the MongoDb Local Instance
+// Connecting to the MongoDb Cloud Instance
 mongoose.connect(process.env.MongoDbConnection, {
     useNewUrlParser: true, useUnifiedTopology: true
 }, (error) => {
