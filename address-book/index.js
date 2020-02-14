@@ -6,22 +6,22 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv/config');
 
+// Importing the Routes
+const apiRoutes = require('./routes/api-routes');
+
 // Adding Middleware
 webApi.use(bodyParser.urlencoded({
     extended: true
 }));
 webApi.use(bodyParser.json());
 
-// Importing the Routes
-const apiRoutes = require('./routes/api-routes');
-
-// Adding API Routes
-webApi.use('/api', apiRoutes);
-
 // Default Routes
 webApi.get('/', (request, response) => {
     response.send('NodeJS express Web API connecting to Atlas MongoDb.');
 });
+
+// Adding API Routes
+webApi.use('/api', apiRoutes);
 
 // Connecting to the MongoDb Cloud Instance
 mongoose.connect(process.env.MongoDbConnection, {

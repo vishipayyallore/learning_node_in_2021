@@ -11,6 +11,12 @@ router.get('/', (request, response) => {
         });
 });
 
+// Import Address Book Route
+const addressBookRoutes = require('../controllers/addressBookController');
+
+// Address Book Routes 
+router.route('/addressbook')
+        .get(addressBookRoutes.get);
 
 // Export API Routes
 module.exports = router;
