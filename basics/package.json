@@ -1,0 +1,14 @@
+{
+  "name": "basics",
+  "version": "1.0.1",
+  "description": "This is Sample Project. Learning Basics of NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon"
+  },
+  "author": "Viswanatha Swamy",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
