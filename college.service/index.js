@@ -20,13 +20,14 @@ app.get('/', (req, res) => {
 });
 
 // Connecting to the MongoDb Local Instance
-mongoose.connect(process.env.MongoDbConnection, { 
-    useNewUrlParser: true, useUnifiedTopology: true }, (error) => {
-        if(error) {
-            console.log(`Error Connecting to Cloud MongoDb ${error}`); 
-        } else {
-            console.log('Connected to MongoDb in Cloud');
-        }
+mongoose.connect(process.env.MongoDbConnection, {
+    useNewUrlParser: true, useUnifiedTopology: true
+}, (error) => {
+    if (error) {
+        console.log(`Error Connecting to Cloud MongoDb ${error}`);
+    } else {
+        console.log('Connected to MongoDb in Cloud');
+    }
 });
 
 var port = process.env.PORT || 3000;
