@@ -13,7 +13,7 @@ router.get('/:policyFile', (req, res) => {
 
     fs.readFile(`documents/${policyIdentifier}.txt`, 'utf8', function (err, contents) {
         if (err) {
-            console.error(`Error in reading policy1.txt ${err}`);
+            console.error(`Error in reading policy file. ${err}`);
         } else {
             console.log(contents);
             res.send(contents);

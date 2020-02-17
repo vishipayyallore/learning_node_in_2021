@@ -9,10 +9,12 @@ app.use(bodyParser.json());
 // Import Routes
 const professorsRoute = require('./routes/professors');
 const studentsRoute = require('./routes/students');
+const policyRoutes = require('./routes/collegePolicies');
 
 // Middleware (To Import Routes)
 app.use('/professors', professorsRoute);
 app.use('/students', studentsRoute);
+app.use('/policies', policyRoutes);
 
 // Routes
 app.get('/', (req, res) => {
