@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     res.send('Policy Documents default route.');
 });
 
-router.get('/:policyFile', (req, res) => {
+router.get('/:policyFile', async (req, res) => {
 
     const policyIdentifier = req.params.policyFile;
 
