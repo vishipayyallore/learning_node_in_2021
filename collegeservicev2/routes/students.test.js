@@ -10,7 +10,7 @@ describe('Students Routes Testing', () => {
     });
 
     it('Should get the College Policy Default Content', async () => {
-        const res = await request(app).get('/api/policies');
+        const res = await request(app).get('/policies');
         expect(res.statusCode).toEqual(200);
     });
 

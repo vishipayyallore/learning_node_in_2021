@@ -35,8 +35,9 @@ mongoose.connect(process.env.MongoDbConnection, {
 var port = process.env.PORT || 3000;
 
 // Listen to the server
-app.listen(port, () => {
-    // console.log(`Env Port: ${process.env.PORT}`);
-    // console.log(`Server Listening at port ${port}. http://localhost:${port}`);
+app.listen(port, async () => {
+    console.log(`Env Port: ${process.env.PORT}`);
+    console.log(`Server Listening at port ${port}. http://localhost:${port}`);
 });
 
+module.exports = app;
