@@ -28,7 +28,7 @@ mongoose.connect(process.env.MongoDbConnection, {
     if (error) {
         console.log(`Error Connecting to Cloud MongoDb ${error}`);
     } else {
-        console.log('Connected to MongoDb in Cloud');
+        // console.log('Connected to MongoDb in Cloud');
     }
 });
 
@@ -36,7 +36,7 @@ var port = process.env.PORT || 3000;
 
 // Listen to the server
 app.listen(port, () => {
-    console.log(`Env Port: ${process.env.PORT}`);
-    console.log(`Server Listening at port ${port}. http://localhost:${port}`);
+    // console.log(`Env Port: ${process.env.PORT}`);
+    // console.log(`Server Listening at port ${port}. http://localhost:${port}`);
 });
 
