@@ -1,9 +1,11 @@
 const http = require('http');
 
+const httpHeaders = { 'Content-Type': 'text/plain', 'Cache-Control': 'max-age=180' };
+
 const webApi = http.createServer((request, response) => {
 
     // Sending Http Header, Status, Content Type
-    response.writeHead(200, { 'Content-Type': 'text/plain' });
+    response.writeHead(200, httpHeaders);
 
     response.end('\nThe Server Application.');
 });
