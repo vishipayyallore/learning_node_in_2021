@@ -1,6 +1,7 @@
 const http = require('http');
 
-const httpHeaders = { 'Content-Type': 'text/plain', 'Cache-Control': 'max-age=180' };
+// const httpHeaders = { 'Content-Type': 'text/plain', 'Cache-Control': 'max-age=180' };
+const httpHeaders = '{ "Content-Type": "text/plain" }';
 
 const webApi = http.createServer((request, response) => {
 
@@ -8,9 +9,10 @@ const webApi = http.createServer((request, response) => {
     response.writeHead(200, httpHeaders);
 
     var headersObject = JSON.parse(httpHeaders);
-    var lines = headersObject.Files.Lines;
-    var keys = Object.keys(lines);
+    // var lines = headersObject.Files.Lines;
+    // var keys = Object.keys(lines);
 
+    /*
     keys.array.forEach(element => {
         response.write(`Keys ${element}`);
     });
@@ -18,6 +20,7 @@ const webApi = http.createServer((request, response) => {
     headersObject.Files.Lines.array.forEach(element => {
         response.write(`Data ${element}`);
     });
+    */
 
     response.write('\nThe Server Application.');
     response.end();
