@@ -1,14 +1,14 @@
 const http = require('http');
 
-// const httpHeaders = { 'Content-Type': 'text/plain', 'Cache-Control': 'max-age=180' };
-const httpHeaders = '{ "Content-Type": "text/plain" }';
+const httpHeaders = { 'Content-Type': 'text/plain', 'Cache-Control': 'max-age=180' };
+// const httpHeaders = '{ "Content-Type": "text/plain" }';
 
 const webApi = http.createServer((request, response) => {
 
     // Sending Http Header, Status, Content Type
     response.writeHead(200, httpHeaders);
 
-    var headersObject = JSON.parse(httpHeaders);
+    // var headersObject = JSON.parse(httpHeaders);
     // var lines = headersObject.Files.Lines;
     // var keys = Object.keys(lines);
 
