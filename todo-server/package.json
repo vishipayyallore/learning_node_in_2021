@@ -4,7 +4,8 @@
     "description": "Simple Node JS application with Express.",
     "main": "server.ts",
     "scripts": {
-        "dev": "ts-node ./src/server.ts",
+        "build": "tsc",
+        "start": "ts-node ./src/server.ts",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Viswanatha Swamy",
@@ -15,6 +16,6 @@
         "typescript": "^3.8.3"
     },
     "devDependencies": {
-        "@types/node": "^13.13.5"
+        "@types/express": "^4.17.6"
     }
 }
