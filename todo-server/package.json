@@ -1,0 +1,20 @@
+{
+    "name": "todo-server",
+    "version": "1.0.1",
+    "description": "Simple Node JS application with Express.",
+    "main": "server.ts",
+    "scripts": {
+        "dev": "ts-node ./src/server.ts",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Viswanatha Swamy",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "ts-node": "^8.10.1",
+        "typescript": "^3.8.3"
+    },
+    "devDependencies": {
+        "@types/node": "^13.13.5"
+    }
+}
