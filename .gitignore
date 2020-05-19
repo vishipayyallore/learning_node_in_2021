@@ -103,3 +103,8 @@ dist
 # TernJS port file
 .tern-port
 .vs/slnx.sqlite
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
+.vs/slnx.sqlite
+.vs/slnx.sqlite
+.vs/learning_node_in_2020/v16/.suo
