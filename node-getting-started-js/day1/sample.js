@@ -1,19 +1,19 @@
-const square = (a) => {
+'use strict';
+
+// Sample 1
+const squareV1 = (a) => {
     return a * a;
 };
+console.log(`Square V1: ${squareV1(5)}`);
 
-console.log(square(5));
+// Sample 2
+const squareV2 = (a) => a * a;
+console.log(`Square V2: ${squareV2(6)}`);
 
-const values = [1, 2, 3, 4];
-const squares = values.map(a => a * a);
-console.log(`Squares of ${values} are ${squares}`);
+// Sample 3
+const squareV3 = a => a * a;
+console.log(`Square V3: ${squareV3(7)}`);
 
-const sum = squares.reduce(function (result, item) {
-    return result + item;
-}, 0);
-console.log(`Sum of Squares: ${sum}`);
-
-
-
-// const square = (a) => a * a;
-// const square = a => a * a;
+// Sample 4
+const squareV4 = (a) => { return a * a; }
+console.log(`Square V4: ${squareV4(8)}`);
