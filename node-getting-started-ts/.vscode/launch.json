@@ -5,15 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug ts-node current file",
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
-            "skipFiles": [
-                "<node_internals>/**"
+            "cwd": "${fileDirname}",
+            "runtimeArgs": [
+                "-r",
+                "ts-node/register"
             ],
-            "program": "${workspaceFolder}\\day1\\src\\index.ts",
-            "outFiles": [
-                "${workspaceFolder}/**/*.js"
+            "args": [
+                "${file}"
             ]
         }
     ]
