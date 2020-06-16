@@ -18,3 +18,11 @@ setTimeout(function () {
     logMessage(`Example 2 :: ${message}`);
 }, WaitTimeOneSecond);
 logMessage(`Wait for setTimeout Example 2's output.`);
+
+// setTimeout Example 3
+const displayMessage = (message) => {
+    logMessage(message);
+};
+
+setTimeout(displayMessage, WaitTimeOneSecond, `Example 3 :: ${message}`);
+logMessage(`Wait for setTimeout Example 3's output.`);
