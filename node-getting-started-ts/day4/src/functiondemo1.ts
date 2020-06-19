@@ -3,13 +3,13 @@
 /*
     Description: A function which accepts nothing and returns nothings.
 */
-const displayMessageV1 = function () {
+const greetHello = function () {
     console.log('Hello World');
 }
 
-displayMessageV1();
-displayMessageV1();
-displayMessageV1();
-displayMessageV1();
-displayMessageV1();
-displayMessageV1();
+greetHello();
+greetHello();
+greetHello();
+greetHello();
+greetHello();
+greetHello();
