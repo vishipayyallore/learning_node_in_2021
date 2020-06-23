@@ -1,18 +1,28 @@
-'use strict';
+"use strict";
 
+require('colors');
+
+const message = `This is setTimeout's DEFAULT message.`;
 const WaitTimeOneSecond = 1000;
-let value1 = 100;
 
-setTimeout(function () {
+const logMessage = (message) => {
 
-    console.log(`Value1: ${value1}`);
-    value1 = 0;
-    console.log(`Value1: ${value1}`);
+  console.log(message.red);
+
+};
+
+// setTimeout Example 1
+setTimeout(() => {
+
+  logMessage(`Example 1 :: ${message}`.yellow.bgBlue);
 
 }, WaitTimeOneSecond);
+logMessage(`Wait for setTimeout Example 1's output.`.blue);
 
-const value2 = value1; // 100 or 0?
+// setTimeout Example 2
+setTimeout(function () {
 
-console.log(`A: ${value1} | B: ${value2}`);
+  logMessage(`Example 2 :: ${message}`);
 
-
+}, WaitTimeOneSecond);
+logMessage(`Wait for setTimeout Example 2's output.`.bgCyan);

@@ -1,26 +1,19 @@
-'use strict';
+"use strict";
 
 import { WaitTimeOneSecond } from './common';
 
-const LoopUntil = 9000000000;
-
-// Returns the number of milliseconds
-const getCurrentMilliseconds = () => {
-
-    return Date.now();
-
-};
-
-const start = getCurrentMilliseconds();
+let value1 = 100;
 
 setTimeout(function () {
 
-    const current = getCurrentMilliseconds();
-
-    console.log(`Current: ${current} | Start: ${start}`);
-    console.log(current - start);
-
+    console.log(`Value1: ${value1}`);
+    value1 = 0;
+    console.log(`Value1: ${value1}`);
 }, WaitTimeOneSecond);
 
-// A Loop
-for (var i = 0; i < LoopUntil; ++i) { }
+const value2 = value1; // 100 or 0?
+
+console.log(`A: ${value1} | B: ${value2}`);
+
+
+// import * as common from './common';

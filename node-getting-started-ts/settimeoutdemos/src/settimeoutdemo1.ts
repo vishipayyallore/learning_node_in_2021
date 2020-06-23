@@ -1,19 +1,23 @@
-"use strict";
+'use strict';
 
-import { WaitTimeOneSecond } from './common';
+import * as colors from 'colors';
 
-let value1 = 100;
+const message = `This is setTimeout's DEFAULT message.`;
+const WaitTimeOneSecond = 1000;
 
-setTimeout(function () {
+const logMessage = (message: string) => {
+    console.log(message);
+};
 
-    console.log(`Value1: ${value1}`);
-    value1 = 0;
-    console.log(`Value1: ${value1}`);
+// setTimeout Example 1
+setTimeout(() => {
+    logMessage(`Example 1 :: ${message}`);
 }, WaitTimeOneSecond);
+logMessage(`Wait for setTimeout Example 1's output.`);
 
-const value2 = value1; // 100 or 0?
+// setTimeout Example 2
+setTimeout(function () {
+    logMessage(`Example 2 :: ${message}`);
+}, WaitTimeOneSecond);
+logMessage(`Wait for setTimeout Example 2's output.`);
 
-console.log(`A: ${value1} | B: ${value2}`);
-
-
-// import * as common from './common';
