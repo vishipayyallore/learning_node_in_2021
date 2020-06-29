@@ -12,6 +12,7 @@ function booksController(Book) {
                 .send('Title field is required');
         }
 
+        console.log(JSON.stringify(request.body));
         book.save();
 
         return response
