@@ -20,6 +20,10 @@ function booksController(Book) {
             .json(book);
     }
 
+    function get(request, response) {
+
+    }
+
     return { post };
 }
 

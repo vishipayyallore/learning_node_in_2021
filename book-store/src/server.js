@@ -21,4 +21,3 @@ mongoDbConnection
         console.log(`Error:: Unable to connect to Mongo Database. Message:: ${error}`);
 
     });
-
