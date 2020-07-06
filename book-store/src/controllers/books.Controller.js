@@ -1,22 +1,25 @@
 'use strict';
 
+const bookSchemaValidator = require('../models/book.SchemaValidator');
+
 function booksController(Book) {
 
     async function post(request, response) {
 
-        const book = new Book(request.body);
+        console.log(JSON.stringify(request.body));
 
         // We need to verify both Author Name and Title
-        if (!request.body.title) {
-            return response
-                .status(400)
-                .send('Title field is required');
+        const isBookValid = bookSchemaValidator.validate(request.body);
+        console.log("validation result", isBookValid);
+        if (isBookValid.error) {
+            return response.status(400).json(isBookValid.error);
         }
 
-        console.log(JSON.stringify(request.body));
+        const book = new Book(request.body);
         await book.save();
 
         console.log(`Sending Output: ${JSON.stringify(request.body)}`);
+
         return response
             .status(201)
             .json(book);
