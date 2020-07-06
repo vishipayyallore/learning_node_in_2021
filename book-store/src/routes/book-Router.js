@@ -9,7 +9,8 @@ function routes(Book) {
     const bookController = booksController(Book);
 
     bookRouter.route('/books')
-        .post(bookController.post);
+        .post(bookController.post)
+        .get(bookController.get);
 
     return bookRouter;
 }

@@ -2,10 +2,11 @@
 
 function booksController(Book) {
 
-    function post(request, response) {
+    async function post(request, response) {
 
         const book = new Book(request.body);
 
+        // We need to verify both Author Name and Title
         if (!request.body.title) {
             return response
                 .status(400)
@@ -13,18 +14,29 @@ function booksController(Book) {
         }
 
         console.log(JSON.stringify(request.body));
-        book.save();
+        await book.save();
 
+        console.log(`Sending Output: ${JSON.stringify(request.body)}`);
         return response
             .status(201)
             .json(book);
     }
 
-    function get(request, response) {
+    async function get(request, response) {
+        try {
+            const allBooks = await Book.find({});
 
+            if (allBooks && allBooks.length > 0) {
+                response.status(200).json(allBooks);
+            } else {
+                response.status(404).json();
+            }
+        } catch (error) {
+            response.status(500).json(error);
+        }
     }
 
-    return { post };
+    return { post, get };
 }
 
 module.exports = booksController;
