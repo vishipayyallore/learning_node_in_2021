@@ -8,10 +8,6 @@ function routes(Book) {
     const bookRouter = express.Router();
     const bookController = booksController(Book);
 
-    bookRouter.route('/books')
-        .post(bookController.post)
-        .get(bookController.get);
-
     // Middleware For Retrieving the Book
     bookRouter.use('/books/:bookId', (request, response, next) => {
         console.log(`Using Middleware for finding Book.`);
@@ -32,10 +28,12 @@ function routes(Book) {
 
     });
 
+    bookRouter.route('/books')
+        .post(bookController.post)
+        .get(bookController.get);
+
     bookRouter.route('/books/:bookId')
-        .get((request, response) => {
-            response.status(200).json(request.book)
-        });
+        .get(bookController.getBookById);
 
     return bookRouter;
 }

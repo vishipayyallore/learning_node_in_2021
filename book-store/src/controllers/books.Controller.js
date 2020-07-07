@@ -10,36 +10,57 @@ function booksController(Book) {
 
         // We need to verify both Author Name and Title
         const isBookValid = bookSchemaValidator.validate(request.body);
-        console.log("validation result", isBookValid);
+
         if (isBookValid.error) {
+            console.log("validation result", isBookValid);
             return response.status(400).json(isBookValid.error);
         }
 
-        const book = new Book(request.body);
-        await book.save();
+        // Verify if book's title with same author already exists.
+        const similarBookExist = await Book.findOne({ author: request.body.author, title: request.body.title });
 
-        console.log(`Sending Output: ${JSON.stringify(request.body)}`);
+        if (similarBookExist) {
 
-        return response
-            .status(201)
-            .json(book);
+            console.log(`Does Similar Book Exists: ${similarBookExist}`);
+            return response.status(400).json(`Book with "${request.body.title}" title exists from "${request.body.author}" author.`);
+
+        }
+
+        try {
+
+            const book = new Book(request.body);
+            await book.save();
+
+            console.log(`Sending Output: ${JSON.stringify(book)}`);
+            return response.status(201).json(book);
+
+        } catch (error) {
+            return response.status(500).json(error);
+        }
+
     }
 
     async function get(request, response) {
         try {
+
             const allBooks = await Book.find({});
 
             if (allBooks && allBooks.length > 0) {
-                response.status(200).json(allBooks);
+                return response.status(200).json(allBooks);
             } else {
-                response.status(404).json();
+                return response.status(404).json();
             }
+
         } catch (error) {
-            response.status(500).json(error);
+            return response.status(500).json(error);
         }
     }
 
-    return { post, get };
+    async function getBookById(request, response) {
+        return response.status(200).json(request.book);
+    }
+
+    return { post, get, getBookById };
 }
 
 module.exports = booksController;
