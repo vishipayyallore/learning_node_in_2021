@@ -6,17 +6,14 @@ const app = require('../../src/app');
 
 describe('Testing /src/app.js', () => {
 
-    let apiServer = request(app);
+    const apiServer = request(app);
 
     beforeEach(() => {
-
-        apiServer = request(app);
-
+        // apiServer = request(app);
     });
 
     afterEach(() => {
         //TODO: Update this section
-
     });
 
     // /Get API Route
@@ -26,7 +23,7 @@ describe('Testing /src/app.js', () => {
 
         it('API Should return default response', async function (done) {
 
-            const response = await apiServer.get('/books');
+            const response = await apiServer.get('/');
 
             expect(response.status).toBe(200);
             expect(JSON.parse(response.text)).toBe(defaultMessage);

@@ -2,4 +2,4 @@
 // After 5 seconds jest exits from the test
 
 console.log('Running jest.setup.js')
-jest.setTimeout(30 * 1000); // 30 seconds
+jest.setTimeout(5 * 1000); // 5 seconds

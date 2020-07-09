@@ -1,38 +1,46 @@
 'use strict';
 
-const app = require('../../src/app');
 const request = require('supertest');
+const app = require('../../src/app');
 
-const Book = require('../../src/models/book.Model');
-const booksController = require('../../src/controllers/books.Controller')(Book);
 
 describe('Testing /src/app.js', () => {
 
-    let apiServer = request(app);
+    const apiServer = request(app);
 
     beforeEach(() => {
-
-        apiServer = request(app);
-
+        // apiServer = request(app);
     });
 
     afterEach(() => {
         //TODO: Update this section
-
     });
 
-    describe('Book Router /books/:bookId().', () => {
+    // /Get API Route
+    describe('App :: /get Route', () => {
 
-        test('Testing', async (done) => {
+        const defaultMessage = 'Welcome to Books Web API.';
 
-            Book.findById = jest.fn().mockReturnValue([]);
-            const response = await apiServer.get('/api/');
+        it('API Should return default response', async function (done) {
 
-            console.log(`${JSON.stringify(response)}`);
+            const response = await apiServer.get('/');
 
-            done();
+            expect(response.status).toBe(200);
+            expect(JSON.parse(response.text)).toBe(defaultMessage);
+
+            done()
         });
 
     });
 
 });
+
+
+/*request(app)
+    .get('/')
+    .set('Accept', 'application/json')
+    .expect('Content-Type', /json/)
+    .expect(200, done);*/
+
+                // console.log(`${JSON.parse(response.text)}`);
+
