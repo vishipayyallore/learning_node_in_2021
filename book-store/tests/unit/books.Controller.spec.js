@@ -9,26 +9,45 @@ describe('Testing books.Controller /src/controllers/books.Controller.js', () => 
     // Variables.
     let request, response;
     const _book = {
-        author: 'Dummy Author',
+        'author': 'Dummy Author',
+        'title': 'Node JS',
+        'dateOfPublish': '01-Jan-2020',
+        'language': "JavaScript",
+        'read': false
+    };
+
+    const _bookInvalid = {
         title: 'Node JS',
         dateOfPublish: '01-Jan-2020',
         language: "JavaScript",
         read: false
     };
 
-    beforeEach(() => {
+    const _bookExists = {
+        dateOfPublish: '2020 - 07 - 07T03: 37: 43.000Z',
+        language: 'Python',
+        read: false,
+        _id: '5f03ee290d4b4a1198c4e1e8',
+        author: 'Viswanatha Swamy',
+        title: '4th Book',
+        __v: 0
+    };
 
+    beforeEach(() => {
         request = httpMock.createRequest();
         response = httpMock.createResponse();
 
+        request.book = _book;
+        Book.find = jest.fn();
     });
 
     afterEach(() => {
-        //TODO: Update this section
+        Book.find.mockClear();
 
+        request.book = {};
     });
 
-    // Get Book By Id Methods
+    // getBookById() return 200
     describe('Books Controller :: getBookById()', () => {
 
         test('getBookById() function is defined', async (done) => {
@@ -40,11 +59,10 @@ describe('Testing books.Controller /src/controllers/books.Controller.js', () => 
 
         test('getBookById() function should return 200', async (done) => {
 
-            request.book = _book;
-
             await booksController.getBookById(request, response);
 
             expect(response.statusCode).toBe(200);
+            // console.log(`Output Received: ${JSON.stringify(response._getJSONData())}`);
             expect(response._getJSONData()).toStrictEqual(_book);
 
             done();
@@ -52,16 +70,105 @@ describe('Testing books.Controller /src/controllers/books.Controller.js', () => 
 
     });
 
+    // get() Returns all the books. 200, 404 OR 500
+    describe('Books Controller :: get()', () => {
 
-    describe('Books Controller :: getBookById()', () => {
+        test('get() function is defined', async () => {
 
-        test('getBookById() function is defined', async () => {
+            expect(typeof booksController.get).toBe('function');
 
-            expect(typeof booksController.getBookById).toBe('function');
+        });
 
+        test('get() function should return 404', async (done) => {
+            Book.find = jest.fn().mockReturnValue([]);
+
+            await booksController.get(request, response);
+
+            expect(response.statusCode).toBe(404);
+
+            done();
+        });
+
+        test('get() function should return 200', async (done) => {
+            Book.find = jest.fn().mockResolvedValue([_book]);
+
+            await booksController.get(request, response);
+
+            expect(response.statusCode).toBe(200);
+
+            done();
+        });
+
+        test('get() function should return 500', async (done) => {
+            Book.find = jest.fn().mockRejectedValue('Dummy Error');
+
+            await booksController.get(request, response);
+
+            expect(response.statusCode).toBe(500);
+
+            done();
+        });
+    });
+
+    // post() return 200, 400, and 500
+    describe('Books Controller :: post()', () => {
+
+        test('post() function is defined', async (done) => {
+
+            expect(typeof booksController.post).toBe('function');
+
+            done();
+        });
+
+        test('post() function should return 400 when Invalid request is sent', async (done) => {
+
+            request.body = _bookInvalid;
+
+            await booksController.post(request, response);
+
+            expect(response.statusCode).toBe(400);
+
+            console.log(`Response: ${JSON.stringify(response._getJSONData())}`);
+
+            done();
+        });
+
+        test('post() function should return 400 when record already exists', async (done) => {
+
+            request.body = _book;
+
+            Book.findOne = jest.fn().mockReturnValue(_bookExists);
+
+            await booksController.post(request, response);
+
+            expect(response.statusCode).toBe(400);
+
+            console.log(`Response: ${JSON.stringify(response._getJSONData())}`);
+
+            done();
+        });
+
+        test('post() function should return 201 when record does not exists', async (done) => {
+
+            request.body = _book;
+
+            Book.findOne = jest.fn().mockReturnValue(null);
+            Book.create = jest.fn().mockReturnValue(_book);
+
+            await booksController.post(request, response);
+
+            expect(response.statusCode).toBe(201);
+
+            console.log(`Response: ${JSON.stringify(response._getJSONData())}`);
+
+            done();
         });
 
     });
 
 });
 
+// console.log(`Response: ${JSON.stringify(response)}`);
+// expect(response._getJSONData()).toStrictEqual(_book);
+// console.log(`Request.Book: ${JSON.stringify(request.book)}`);
+// expect(response._getJSONData()).toStrictEqual(_book);

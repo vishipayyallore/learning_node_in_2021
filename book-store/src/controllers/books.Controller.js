@@ -6,7 +6,7 @@ function booksController(Book) {
 
     async function post(request, response) {
 
-        console.log(JSON.stringify(request.body));
+        console.log(`Input Received: ${JSON.stringify(request.body)}`);
 
         // We need to verify both Author Name and Title
         const isBookValid = bookSchemaValidator.validate(request.body);
@@ -17,19 +17,18 @@ function booksController(Book) {
         }
 
         // Verify if book's title with same author already exists.
-        const similarBookExist = await Book.findOne({ author: request.body.author, title: request.body.title });
+        const similarBookExist = await Book.findOne({ author: request.body.author, title: request.body.title, language: request.body.language });
 
         if (similarBookExist) {
-
             console.log(`Does Similar Book Exists: ${similarBookExist}`);
             return response.status(400).json(`Book with "${request.body.title}" title exists from "${request.body.author}" author.`);
-
         }
 
         try {
 
-            const book = new Book(request.body);
-            await book.save();
+            // const book = new Book(request.body);
+            // await book.save();
+            const book = await (Book.create(request.body))
 
             console.log(`Sending Output: ${JSON.stringify(book)}`);
             return response.status(201).json(book);
