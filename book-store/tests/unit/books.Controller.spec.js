@@ -8,6 +8,7 @@ describe('Testing books.Controller /src/controllers/books.Controller.js', () => 
 
     // Variables.
     let request, response;
+
     const _book = {
         'author': 'Dummy Author',
         'title': 'Node JS',
@@ -62,7 +63,6 @@ describe('Testing books.Controller /src/controllers/books.Controller.js', () => 
             await booksController.getBookById(request, response);
 
             expect(response.statusCode).toBe(200);
-            // console.log(`Output Received: ${JSON.stringify(response._getJSONData())}`);
             expect(response._getJSONData()).toStrictEqual(_book);
 
             done();
@@ -80,6 +80,7 @@ describe('Testing books.Controller /src/controllers/books.Controller.js', () => 
         });
 
         test('get() function should return 404', async (done) => {
+
             Book.find = jest.fn().mockReturnValue([]);
 
             await booksController.get(request, response);
@@ -108,6 +109,7 @@ describe('Testing books.Controller /src/controllers/books.Controller.js', () => 
 
             done();
         });
+
     });
 
     // post() return 200, 400, and 500
@@ -127,8 +129,6 @@ describe('Testing books.Controller /src/controllers/books.Controller.js', () => 
             await booksController.post(request, response);
 
             expect(response.statusCode).toBe(400);
-
-            console.log(`Response: ${JSON.stringify(response._getJSONData())}`);
 
             done();
         });
@@ -159,7 +159,19 @@ describe('Testing books.Controller /src/controllers/books.Controller.js', () => 
 
             expect(response.statusCode).toBe(201);
 
-            console.log(`Response: ${JSON.stringify(response._getJSONData())}`);
+            done();
+        });
+
+        test('post() function should return 500 when it fail to create', async (done) => {
+
+            request.body = _book;
+
+            Book.findOne = jest.fn().mockReturnValue(null);
+            Book.create = jest.fn().mockRejectedValue('Unable to save');
+
+            await booksController.post(request, response);
+
+            expect(response.statusCode).toBe(500);
 
             done();
         });
@@ -172,3 +184,7 @@ describe('Testing books.Controller /src/controllers/books.Controller.js', () => 
 // expect(response._getJSONData()).toStrictEqual(_book);
 // console.log(`Request.Book: ${JSON.stringify(request.book)}`);
 // expect(response._getJSONData()).toStrictEqual(_book);
+// console.log(`Response: ${JSON.stringify(response._getJSONData())}`);
+// console.log(`Response: ${JSON.stringify(response._getJSONData())}`);
+// console.log(`Response: ${JSON.stringify(response._getJSONData())}`);
+// console.log(`Output Received: ${JSON.stringify(response._getJSONData())}`);

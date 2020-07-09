@@ -25,9 +25,6 @@ function booksController(Book) {
         }
 
         try {
-
-            // const book = new Book(request.body);
-            // await book.save();
             const book = await (Book.create(request.body))
 
             console.log(`Sending Output: ${JSON.stringify(book)}`);
