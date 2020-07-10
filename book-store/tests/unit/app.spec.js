@@ -8,14 +8,6 @@ describe('Testing /src/app.js', () => {
 
     const apiServer = request(app);
 
-    beforeEach(() => {
-        // apiServer = request(app);
-    });
-
-    afterEach(() => {
-        //TODO: Update this section
-    });
-
     // /Get API Route
     describe('App :: /get Route', () => {
 
