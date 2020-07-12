@@ -1,10 +1,7 @@
 'use strict';
 
 const sinon = require('sinon');
-const faker = require('faker')
 const proxyquire = require('proxyquire')
-const Book = require('../../src/models/book.Model');
-const booksRouter = require('../../src/routes/book-Router')(Book);
 const httpMock = require('node-mocks-http');
 
 describe('Testing /src/routes/bookRouter.js', () => {
@@ -79,9 +76,6 @@ describe('Testing /src/routes/bookRouter.js', () => {
 
             expect(RouterStub.route.calledWith('/books'));
             expect(rootRouteStub.post.calledWith(controllerStub.post));
-
-            // Book.find = jest.fn().mockResolvedValue([]);
-            // booksRouter.getBookById('/books/DummyId', (request, response) => { });
 
         });
 

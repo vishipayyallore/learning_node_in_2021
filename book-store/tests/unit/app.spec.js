@@ -20,6 +20,8 @@ describe('Testing /src/app.js', () => {
             expect(response.status).toBe(200);
             expect(JSON.parse(response.text)).toBe(defaultMessage);
 
+            const response1 = await apiServer.get('/api/books/DummyId');
+            console.log(`Response 1: ${JSON.stringify(response1)}`);
             done()
         });
 
