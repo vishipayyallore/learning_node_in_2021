@@ -24,17 +24,34 @@ describe('Testing /src/app.js', () => {
 
         const defaultMessage = 'Welcome to Books Web API.';
 
-        it('API Should return default response', async function (done) {
+        test('API Should return default response', async function (done) {
 
             const response = await apiServer.get('/');
 
             expect(response.status).toBe(200);
             expect(JSON.parse(response.text)).toBe(defaultMessage);
 
+            done();
+        });
+
+        test('Book Router Should return 500 when invalid id is sent', async function (done) {
+
+            const response = await apiServer.get('/api/books/InvalidId');
+            console.log(`Response 1: ${JSON.stringify(response)}`);
+
+            done();
+        });
+
+        test.skip('Book Router Should return 404 when no data available', async function (done) {
+
             // req = httpMock.createRequest();
             // req.params.bookId = '5f0745314c16a3084cfa41fc';
-            Book.findById = jest.fn().mockReturnValue(_book);
-            booksController.getBookById = jest.fn().mockResolvedValue(_book);
+            // Book.findById = jest.fn().mockReturnValue(_book);
+            // booksController.getBookById = jest.fn().mockResolvedValue(_book);
+            let newBook = jest.spyOn(
+                Book,
+                'findById',
+            );
 
             const response1 = await apiServer.get('/api/books/5f0745314c16a3084cfa41fc');
             console.log(`Response 1: ${JSON.stringify(response1)}`);

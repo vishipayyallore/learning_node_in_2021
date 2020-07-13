@@ -7,7 +7,7 @@ const httpMock = require('node-mocks-http');
 describe('Testing /src/routes/bookRouter.js', () => {
 
     let expressStub, controllerStub, RouterStub, rootRouteStub, idRouteStub
-    let request, response;
+    let request, response, next;
 
     describe('router', () => {
 
@@ -51,6 +51,7 @@ describe('Testing /src/routes/bookRouter.js', () => {
 
             request = httpMock.createRequest();
             response = httpMock.createResponse();
+            next = sinon.mock();
 
         });
 
@@ -63,6 +64,8 @@ describe('Testing /src/routes/bookRouter.js', () => {
         });
 
         test('should map root getBookById() router with controller::getBookById()', () => {
+
+            idRouteStub.use('/books/:bookId', (request, response, next) => { });
 
             idRouteStub.get('/books/:bookId', controllerStub.getBookById);
 
