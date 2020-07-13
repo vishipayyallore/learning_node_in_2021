@@ -2,9 +2,13 @@
 
 const request = require('supertest');
 const app = require('../../src/app');
-const httpMock = require('node-mocks-http');
-const Book = require('../../src/models/book.Model');
-const booksController = require('../../src/controllers/books.Controller')(Book);
+// const httpMock = require('node-mocks-http');
+
+// jest.mock('../../src/models/book.Model');
+
+// and include it as well in your test
+// const Book = require('../../src/models/book.Model');
+// const booksController = require('../../src/controllers/books.Controller')(Book);
 
 describe('Testing /src/app.js', () => {
 
@@ -37,23 +41,23 @@ describe('Testing /src/app.js', () => {
         test('Book Router Should return 500 when invalid id is sent', async function (done) {
 
             const response = await apiServer.get('/api/books/InvalidId');
-            console.log(`Response 1: ${JSON.stringify(response)}`);
+            console.log(`Response : ${JSON.stringify(response)}`);
 
             done();
         });
 
-        test.skip('Book Router Should return 404 when no data available', async function (done) {
-
+        test('Book Router Should return 404 when no data available', async function (done) {
             // req = httpMock.createRequest();
             // req.params.bookId = '5f0745314c16a3084cfa41fc';
-            // Book.findById = jest.fn().mockReturnValue(_book);
             // booksController.getBookById = jest.fn().mockResolvedValue(_book);
-            let newBook = jest.spyOn(
-                Book,
-                'findById',
-            );
+            // Book.findById = jest.fn().mockReturnValue(_book);
 
-            const response1 = await apiServer.get('/api/books/5f0745314c16a3084cfa41fc');
+            app.Book = jest.fn();
+            app.Book.findById = jest.fn().mockReturnValue({});
+            app.bookRouter = jest.fn();
+            const apiServerV1 = request(app);
+
+            const response1 = await apiServerV1.get('/api/books/5f0745314c16a3084cfa41fc');
             console.log(`Response 1: ${JSON.stringify(response1)}`);
 
             done();

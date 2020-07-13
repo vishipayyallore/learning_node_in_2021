@@ -14,18 +14,17 @@ function routes(Book) {
 
         try {
             Book.findById(request.params.bookId, (error, book) => {
+
                 if (error) {
                     return response.status(500).json(`Error from Middleware: ${error}`);
                 }
 
-                console.log(`After Error. Book: ${book}`);
                 if (book) {
                     console.log(`Book Found: ${book}`);
                     request.book = book;
                     return next();
                 }
 
-                console.log(`Returning 404.`);
                 return response.status(404).json();
             });
 
