@@ -2,77 +2,78 @@
 
 const request = require('supertest');
 const app = require('../../src/app');
-// const httpMock = require('node-mocks-http');
-
-// jest.mock('../../src/models/book.Model');
-
-// and include it as well in your test
-// const Book = require('../../src/models/book.Model');
-// const booksController = require('../../src/controllers/books.Controller')(Book);
+const mockMongoDb = require('./__mocks__/MongoDbMock');
 
 describe('Testing /src/app.js', () => {
 
     const apiServer = request(app);
-    let req, res;
 
-    const _book = {
-        'author': 'Dummy Author',
-        'title': 'Node JS',
-        'dateOfPublish': '01-Jan-2020',
-        'language': "JavaScript",
-        'read': false
-    };
+    beforeAll(async () => await mockMongoDb.connect());
 
-    // /Get API Route
-    describe('App :: /get Route', () => {
+    afterEach(async () => await mockMongoDb.clearDatabase());
 
-        const defaultMessage = 'Welcome to Books Web API.';
+    afterAll(async () => await mockMongoDb.closeDatabase());
 
-        test('API Should return default response', async function (done) {
+    describe('Testing API Routes', () => {
 
-            const response = await apiServer.get('/');
+        // "/" Routes
+        describe('App :: "/" Routes', () => {
 
-            expect(response.status).toBe(200);
-            expect(JSON.parse(response.text)).toBe(defaultMessage);
+            const defaultMessage = 'Welcome to Books Web API.';
 
-            done();
+            test('API Should return default response', async function (done) {
+                const response = await apiServer.get('/');
+
+                expect(response.status).toBe(200);
+                expect(JSON.parse(response.text)).toBe(defaultMessage);
+
+                done();
+            });
+
         });
 
-        test('Book Router Should return 500 when invalid id is sent', async function (done) {
+        // "/api/books" Routes
+        describe('Book Routers :: "/api/books" Routes', () => {
 
-            const response = await apiServer.get('/api/books/InvalidId');
-            console.log(`Response : ${JSON.stringify(response)}`);
+            const Book = require('../../src/models/book.Model');
 
-            done();
-        });
+            const _book = {
+                '_id': '5f0745314c16a3084cfa41fc',
+                'author': 'Dummy Author',
+                'title': 'Node JS',
+                'dateOfPublish': '01-Jan-2021',
+                'language': "JavaScript",
+                'read': false
+            };
 
-        test('Book Router Should return 404 when no data available', async function (done) {
-            // req = httpMock.createRequest();
-            // req.params.bookId = '5f0745314c16a3084cfa41fc';
-            // booksController.getBookById = jest.fn().mockResolvedValue(_book);
-            // Book.findById = jest.fn().mockReturnValue(_book);
+            test('Book Router Should return 500 when invalid id is sent', async function (done) {
+                const response = await apiServer.get('/api/books/InvalidId');
 
-            app.Book = jest.fn();
-            app.Book.findById = jest.fn().mockReturnValue({});
-            app.bookRouter = jest.fn();
-            const apiServerV1 = request(app);
+                expect(response.status).toBe(500);
 
-            const response1 = await apiServerV1.get('/api/books/5f0745314c16a3084cfa41fc');
-            console.log(`Response 1: ${JSON.stringify(response1)}`);
+                done();
+            });
 
-            done();
+            test('Book Router Should return 404 when no data available', async function (done) {
+                const response = await apiServer.get('/api/books/5f0745314c16a3084cfa41fc');
+
+                expect(response.status).toBe(404);
+
+                done();
+            });
+
+            test('Book Router Should return 200 when data available', async function (done) {
+                Book.create(_book);
+
+                const response = await apiServer.get('/api/books/5f0745314c16a3084cfa41fc');
+
+                expect(response.status).toBe(200);
+
+                done();
+            });
+
         });
 
     });
 
 });
-
-
-/*request(app)
-    .get('/')
-    .set('Accept', 'application/json')
-    .expect('Content-Type', /json/)
-    .expect(200, done);*/
-
-                // console.log(`${JSON.parse(response.text)}`);
-

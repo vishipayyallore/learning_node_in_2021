@@ -12,25 +12,20 @@ function routes(Book) {
     bookRouter.use('/books/:bookId', (request, response, next) => {
         console.log(`Using Middleware for finding Book. ${request.params.bookId}`);
 
-        try {
-            Book.findById(request.params.bookId, (error, book) => {
+        Book.findById(request.params.bookId, (error, book) => {
 
-                if (error) {
-                    return response.status(500).json(`Error from Middleware: ${error}`);
-                }
+            if (error) {
+                return response.status(500).json(`Error from Middleware: ${error}`);
+            }
 
-                if (book) {
-                    console.log(`Book Found: ${book}`);
-                    request.book = book;
-                    return next();
-                }
+            if (book) {
+                console.log(`Book Found: ${book}`);
+                request.book = book;
+                return next();
+            }
 
-                return response.status(404).json();
-            });
-
-        } catch (error) {
-            return response.status(500).json(`Error at bookRouter.use(). Message: ${error}`);
-        }
+            return response.status(404).json();
+        });
 
     });
 
