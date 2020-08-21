@@ -13,3 +13,7 @@ reports/
 /.vs/ProjectSettings.json
 .vs/VSWorkspaceState.json
 .vs/booksstore-sample/v16/.suo
+
+src/config/appConfig.env
+src/config/.env
+.env
