@@ -2,6 +2,11 @@
 
 const webApi = require('./app');
 const mongoDbConnection = require('./Persistence/mongoDb.Helper');
+const path = require('path');
+const dotenv = require('dotenv');
+
+// Load the Configuration from the given Path
+dotenv.config({ path: path.resolve(process.cwd(), 'src/config/.env')});
 
 var port = process.env.PORT || 3000;
 
