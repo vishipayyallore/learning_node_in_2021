@@ -34,7 +34,9 @@ function routes(Book) {
         .get(bookController.get);
 
     bookRouter.route('/books/:bookId')
-        .get(bookController.getBookById);
+        .get(bookController.getBookById)
+        .put(bookController.updateBookById)
+        .delete(bookController.deleteBookById);
 
     return bookRouter;
 }
