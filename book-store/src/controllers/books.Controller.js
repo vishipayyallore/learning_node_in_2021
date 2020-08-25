@@ -84,7 +84,6 @@ function booksController(Book) {
                 return response.status(500).json(error);
             }
             else {
-                // console.log(`Book Deleted: ${book}`);
                 return response.status(204).json({ 'success': true, 'Message': 'Book Deleted Successfully' });
             }
         });
