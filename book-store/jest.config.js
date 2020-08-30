@@ -7,7 +7,7 @@ module.exports = {
             "./node_modules/jest-html-reporter",
             {
                 pageTitle: "Test-Report",
-                outputPath: "Test-Report.html",
+                outputPath: "./coverage/Jest-Unit-Test-Report.html",
                 includeFailureMsg: true
             }
         ]
