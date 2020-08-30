@@ -1,13 +1,14 @@
 'use strict';
 
 import * as morgan from 'morgan';
+import * as chalk from 'chalk';
 
 export const morganLogger = morgan(function (tokens, req, res) {
-    return [
-        tokens.method(req, res),
-        tokens.url(req, res),
-        tokens.status(req, res),
-        tokens.res(req, res, 'content-length'), '-',
-        tokens['response-time'](req, res), 'ms'
-    ].join(' ')
+    return chalk.blue.bold([
+        'Method:', tokens.method(req, res),
+        '\tEnd Point:', tokens.url(req, res),
+        '\tStatus:', tokens.status(req, res),
+        '\tContent Length:', tokens.res(req, res, 'content-length'),
+        '\tResponse Time', tokens['response-time'](req, res), 'ms'
+    ].join(' '));
 });

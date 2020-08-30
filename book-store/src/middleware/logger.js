@@ -5,13 +5,13 @@ const chalk = require('chalk');
 
 // Logger Middleware
 const morganLogger = morgan(function (tokens, req, res) {
-  return chalk.blue.bold([
-    tokens.method(req, res),
-    tokens.url(req, res),
-    tokens.status(req, res),
-    tokens.res(req, res, 'content-length'), '-',
-    tokens['response-time'](req, res), 'ms'
-  ].join(' '));
+    return chalk.blue.bold([
+        'Method:', tokens.method(req, res),
+        '\tEnd Point:', tokens.url(req, res),
+        '\tStatus:', tokens.status(req, res),
+        '\tContent Length:', tokens.res(req, res, 'content-length'),
+        '\tResponse Time', tokens['response-time'](req, res), 'ms'
+    ].join(' '));
 });
 
 module.exports = morganLogger;
