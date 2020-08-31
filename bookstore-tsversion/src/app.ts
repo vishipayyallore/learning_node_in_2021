@@ -2,8 +2,8 @@
 
 import * as express from 'express';
 
-import { morganLogger } from './middleware/logger';
 import * as Book from './models/book.Model';
+import { morganLogger } from './middleware/logger';
 
 // Initialized the application
 export const webApi = express();
@@ -15,13 +15,14 @@ webApi.use(express.json());
 webApi.use(morganLogger);
 
 // Middleware (To Import Additional Routes)
-//webApi.use('/api', bookRouter);
+// webApi.use('/api/v1', bookRouter.routes(Book));
 
 // Default Route
 webApi.get('/api', (request, response) => {
     
-    console.log(JSON.stringify(Book));
-
+    // console.log(JSON.stringify(Book));
+    // console.log(JSON.stringify(bookRouter));
+    
     response.status(200).json("Welcome to Books Web API.");
 });
 

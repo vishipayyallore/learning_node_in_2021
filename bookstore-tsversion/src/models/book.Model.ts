@@ -2,9 +2,7 @@
 
 import * as mongoose from 'mongoose';
 
-const { Schema } = mongoose;
-
-const bookModel = new Schema({
+const bookSchema = new mongoose.Schema({
     author: { type: String, required: true },
 
     title: { type: String, required: true },
@@ -16,6 +14,6 @@ const bookModel = new Schema({
     read: { type: Boolean, default: false }
 });
 
-module.exports = mongoose.model('book', bookModel);
+const bookModel = mongoose.model('book', bookSchema);
 
-
+export default bookModel;
