@@ -5,13 +5,14 @@ import * as path from 'path';
 import { webApi } from './app';
 import * as colors from 'colors';
 
+// Loading Configuration from .env file.
 dotenv.config({ path: path.resolve(process.cwd(), 'src/config/appConfig.env') });
 
-const port = process.env.PORT || 3060;
+logMessage(`Env Port: ${process.env.PORT}`);
+const PORT = process.env.PORT || 3060;
 
-webApi.listen(port, () => {
-    logMessage(`Env Port: ${process.env.PORT}`);
-    logMessage(`Server Listening at port ${port}. http://localhost:${port}/api`);
+webApi.listen(PORT, () => {
+    logMessage(`Server Listening at port ${PORT}. http://localhost:${PORT}/api`);
 });
 
 function logMessage(message: String) {
