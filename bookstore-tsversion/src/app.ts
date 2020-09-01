@@ -3,7 +3,7 @@
 import * as express from 'express';
 
 import * as Book from './models/book.Model';
-import { morganLogger } from './middleware/logger';
+import { morganLogger } from './middleware/logger.middleware';
 
 // Initialized the application
 export const webApi = express();
