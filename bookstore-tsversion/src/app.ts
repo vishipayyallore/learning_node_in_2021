@@ -8,6 +8,7 @@ import { BooksRouter } from './routes/books-Router';
 
 // Initialized the application
 export const webApi = express();
+const APIPATH = '/api/v1';
 
 // express middleware to handle the json body request
 webApi.use(express.json());
@@ -16,10 +17,10 @@ webApi.use(express.json());
 webApi.use(morganLogger);
 
 // Default Route
-webApi.use('/api/v1', new AppRouter().appRoutes);
+webApi.use(APIPATH, new AppRouter().appRoutes);
 
 // Middleware (To Import Additional Routes)
-webApi.use('/api/v1', new BooksRouter().bookRoutes);
+webApi.use(APIPATH, new BooksRouter().bookRoutes);
 
 webApi.get('/api', (request, response) => {
     response.status(200).json({ success: true, message: 'Welcome to Books Web API.', data: {} });

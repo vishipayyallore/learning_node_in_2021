@@ -7,7 +7,8 @@ import { BooksController } from '../controllers/books.Controller';
 export class BooksRouter {
 
     private booksController = new BooksController();
-    
+    private APIPATH = '/books';
+
     public bookRoutes = Router();
 
     constructor() {
@@ -15,8 +16,8 @@ export class BooksRouter {
     }
 
     private initializeRoutes() {
-        this.bookRoutes.get('/books', this.getAllBooks);
-        this.bookRoutes.post('/books', this.addABook);
+        this.bookRoutes.get(this.APIPATH, this.getAllBooks);
+        this.bookRoutes.post(this.APIPATH, this.addABook);
     }
 
     private getAllBooks = async (request: Request, response: Response, next: NextFunction) => {
@@ -24,10 +25,7 @@ export class BooksRouter {
     }
 
     private addABook = async (request: Request, response: Response, next: NextFunction) => {
-
-        console.log(request.body);
-
-        response.status(200).json({ success: true, message: 'Given Book successfully added to Mongo Db.', data: {} });
+        return this.booksController.addABook(request, response, next);
     }
 
 }

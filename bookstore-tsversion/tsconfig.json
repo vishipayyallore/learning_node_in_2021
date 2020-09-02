@@ -3,7 +3,7 @@
         "sourceMap": true,
         "target": "es2017",
         "outDir": "./dist",
-        "moduleResolution": "node",   
+        "moduleResolution": "node",
         "baseUrl": "./src"
     },
     "include": [
