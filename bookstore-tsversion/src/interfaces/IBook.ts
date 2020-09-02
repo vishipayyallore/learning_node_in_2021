@@ -1,4 +1,6 @@
-interface IBook {
+'use strict';
+
+export interface IBook {
   author: String;
 
   title: String;
@@ -10,5 +12,3 @@ interface IBook {
   read: Boolean;
 
 }
-
-export default IBook;
