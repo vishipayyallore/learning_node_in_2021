@@ -1,0 +1,55 @@
+html {
+    position: relative;
+    min-height: 100%;
+  }
+
+  body {
+    padding-top: 5rem;
+    margin-bottom: 60px;
+  }
+
+  body > .container {
+    padding: 10px 15px 0;
+  }
+
+.mainContainer {
+    margin-left: 20Px;
+}
+
+h1 {
+    color: blueviolet;
+}
+
+p {
+    color: blue;
+}
+
+
+  .starter-template {
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+  
+  /* Sticky footer styles
+-------------------------------------------------- */
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 40px;
+    line-height: 40px; /* Vertically center the text there */
+    background-color: #7abff8;
+  }
+  
+  
+  .footer > .container {
+    padding-right: 2px;
+    padding-left: 2px;
+    margin-left: 15Px;
+  }
+  
+  code {
+    font-size: 80%;
+  }
+  
