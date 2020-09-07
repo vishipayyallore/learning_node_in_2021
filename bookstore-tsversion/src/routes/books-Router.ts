@@ -21,11 +21,15 @@ export class BooksRouter {
     }
 
     private getAllBooks = async (request: Request, response: Response, next: NextFunction) => {
-        return this.booksController.getAllBooks(request, response, next);
+
+        return this.booksController
+            .getAllBooks(request, response, next);
     }
 
     private addABook = async (request: Request, response: Response, next: NextFunction) => {
-        return this.booksController.addABook(request, response, next);
+        
+        return this.booksController
+            .addABook(request, response, next);
     }
 
 }

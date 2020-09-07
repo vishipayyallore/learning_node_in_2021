@@ -14,6 +14,6 @@ const bookSchema = new mongoose.Schema({
     read: { type: Boolean, default: false }
 });
 
-const bookModel = mongoose.model('book', bookSchema);
+export const bookModel = mongoose.model('Book', bookSchema);
 
-export default bookModel;
+// export default bookModel;

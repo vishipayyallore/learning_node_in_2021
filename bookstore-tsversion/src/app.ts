@@ -11,6 +11,7 @@ export const webApi = express();
 const APIPATH = '/api/v1';
 
 // express middleware to handle the json body request
+// Without json() it will be request.body === undefined
 webApi.use(express.json());
 
 // Third Party Logger.
@@ -22,16 +23,7 @@ webApi.use(APIPATH, new AppRouter().appRoutes);
 // Middleware (To Import Additional Routes)
 webApi.use(APIPATH, new BooksRouter().bookRoutes);
 
-webApi.get('/api', (request, response) => {
-    response.status(200).json({ success: true, message: 'Welcome to Books Web API.', data: {} });
+webApi.get('/api', (_, response) => {
+    response.status(200)
+        .json({ success: true, message: 'Welcome to Books Web API.', data: {} });
 });
-
-/******************************************************************************************************************************/
-    // response.send('Some Content'); By default it will send "text/html"
-
-    // Log Request
-/*
-console.log(`Complete Request: ${request}`);
-const { headers, url, method } = request;
-console.log(`Headers: ${JSON.stringify(headers)} \nUrl: ${url} \nMethod: ${method}`);
-*/

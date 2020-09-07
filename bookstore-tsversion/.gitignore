@@ -17,3 +17,4 @@ reports/
 src/config/appConfig.env
 src/config/.env
 .env
+appConfig.env

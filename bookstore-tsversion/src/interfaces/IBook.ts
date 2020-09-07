@@ -1,6 +1,7 @@
 'use strict';
 
 export interface IBook {
+  
   author: String;
 
   title: String;

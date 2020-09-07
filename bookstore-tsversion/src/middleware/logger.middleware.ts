@@ -4,7 +4,7 @@ import * as morgan from 'morgan';
 import * as chalk from 'chalk';
 
 export const morganLogger = morgan(function (tokens, req, res) {
-    return chalk.blue.bold([
+    return chalk.magenta.bold([
         new Date().toISOString(), ':: ',
         'Method:', tokens.method(req, res),
         '\tEnd Point:', tokens.url(req, res),
