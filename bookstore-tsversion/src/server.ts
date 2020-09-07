@@ -27,8 +27,8 @@ mongoose.connect(process.env.MongoDBCONNECTION, {
     } else {
 
         // Connecting to the MongoDb Cloud Instance
-        console.log(`Mongo Db Connection: ${process.env.MongoDBCONNECTION}`);
-        console.log('Connected to MongoDb in Cloud');
+        logMessageG(`Mongo Db Connection: ${process.env.MongoDBCONNECTION}`);
+        logMessageG('Connected to MongoDb in Cloud');
 
     }
 
@@ -40,4 +40,8 @@ webApi.listen(PORT, () => {
 
 function logMessage(message: String) {
     console.log(colors.cyan(`${new Date().toISOString()} :: ${message}`).bold);
+}
+
+function logMessageG(message: String) {
+    console.log(colors.green(`${new Date().toISOString()} :: ${message}`).bold);
 }
