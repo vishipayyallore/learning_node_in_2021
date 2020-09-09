@@ -7,25 +7,7 @@ import { bookModel } from '../models/book.Model';
 
 export class BooksController {
 
-    private _books = bookModel;
-
-    // TODO: Delete this once we retrieve data from Mongo Db
-    private books: IBook[] = [
-        {
-            author: 'Shiva',
-            dateOfPublish: new Date(),
-            language: 'C#',
-            read: false,
-            title: 'New Title'
-        },
-        {
-            author: 'Shiva',
-            dateOfPublish: new Date(),
-            language: 'C#',
-            read: true,
-            title: 'New Title 2'
-        }
-    ];
+    private Book = bookModel;
 
     constructor() {
     }
@@ -35,7 +17,7 @@ export class BooksController {
         console.log(`Request Received for retrieving all Books.`);
 
         try {
-            const allBooks = await this._books.find({});
+            const allBooks = await this.Book.find({});
 
             if (allBooks && allBooks.length > 0) {
 
@@ -50,6 +32,7 @@ export class BooksController {
             }
 
         } catch (error) {
+
             return response
                 .status(500)
                 .json(error);
@@ -59,11 +42,32 @@ export class BooksController {
 
     addABook = async (request: Request, response: Response, next: NextFunction) => {
 
-        console.log(`Request Received for inserting new Book. Data: ${JSON.stringify(request.body)}`);
+        try {
 
-        response
-            .status(200)
-            .json({ success: true, message: 'Given Book successfully added to Mongo Db.', data: this.books[1] });
+            const bookData: IBook = request.body;
+            console.log(`Request Received for inserting new Book. Data: ${JSON.stringify(bookData)}`);
+
+            // Verify if book's title with same author already exists.
+            const similarBookExist = await this.Book.findOne({
+                author: bookData.author,
+                title: bookData.title,
+                language: bookData.language
+            });
+
+            if (similarBookExist) {
+                console.log(`Does Similar Book Exists: ${similarBookExist}`);
+                return response.status(400).json(`Book with "${bookData.title}" title exists from "${bookData.author}" author.`);
+            }
+
+            const newBook = await (this.Book.create(bookData))
+
+            console.log(`Sending Output: ${JSON.stringify(newBook)}`);
+            return response.status(201).json(newBook);
+
+        } catch (error) {
+
+            return response.status(500).json(error);
+        }
     }
 
 }
