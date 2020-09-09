@@ -55,12 +55,6 @@ export class BooksController {
                 .json(error);
         }
 
-        /*
-        response
-            .status(200)
-            .json({ success: true, message: 'All Books from Mongo Db.', data: this.books });
-        */
-
     }
 
     addABook = async (request: Request, response: Response, next: NextFunction) => {
