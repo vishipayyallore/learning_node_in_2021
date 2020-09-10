@@ -21,7 +21,7 @@ mongoose.connect(process.env.MongoDBCONNECTION, {
 
     if (error) {
 
-        console.log(`Error Connecting to Cloud MongoDb ${error}`);
+        logMessageR(`Error Connecting to Cloud MongoDb ${error}`);
         throw new Error(error);
 
     } else {
@@ -44,4 +44,8 @@ function logMessage(message: String) {
 
 function logMessageG(message: String) {
     console.log(colors.green(`${new Date().toISOString()} :: ${message}`).bold);
+}
+
+function logMessageR(message: String) {
+    console.log(colors.red(`${new Date().toISOString()} :: ${message}`).bold);
 }

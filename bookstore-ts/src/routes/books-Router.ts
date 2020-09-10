@@ -16,6 +16,10 @@ export class BooksRouter {
     }
 
     private initializeRoutes() {
+
+        // TODO: Get the Book and return it.
+        // this.bookRoutes.use();
+
         this.bookRoutes.get(this.APIPATH, this.getAllBooks);
         this.bookRoutes.post(this.APIPATH, this.addABook);
     }
