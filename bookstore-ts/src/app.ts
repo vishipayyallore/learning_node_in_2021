@@ -6,24 +6,43 @@ import { morganLogger } from './middleware/logger.middleware';
 import { AppRouter } from './routes/app.Router';
 import { BooksRouter } from './routes/books-Router';
 
-// Initialized the application
-export const webApi = express();
 const APIPATH = '/api/v1';
 
-// express middleware to handle the json body request
-// Without json() it will be request.body === undefined
-webApi.use(express.json());
+export class WebApi {
 
-// Third Party Logger.
-webApi.use(morganLogger);
+    // Initialized the application
+    public webApi = express();
+    
+    constructor(){
+        
+        this.initialzeMiddleware();
+        this.initializeRoutes();
+    }
 
-// Default Route
-webApi.use(APIPATH, new AppRouter().appRoutes);
+    private initialzeMiddleware(){
 
-// Middleware (To Import Additional Routes)
-webApi.use(APIPATH, new BooksRouter().bookRoutes);
+        // express middleware to handle the json body request
+        // Without json() it will be request.body === undefined
+        this.webApi.use(express.json());
 
-webApi.get('/api', (_, response) => {
-    response.status(200)
-        .json({ success: true, message: 'Welcome to Books Web API.', data: {} });
-});
+        // Third Party Logger.
+        this.webApi.use(morganLogger);
+    }
+
+    private initializeRoutes(){
+
+        // ******************************************** ROUTES ********************************************
+        this.webApi.get('/api', (_, response) => {
+            response.status(200)
+                .json({ success: true, message: 'Welcome to Books Web API.', data: {} });
+        });
+
+        // Default Route
+        this.webApi.use(APIPATH, new AppRouter().appRoutes);
+
+        // Middleware (To Import Additional Routes)
+        this.webApi.use(APIPATH, new BooksRouter().bookRoutes);
+    }
+
+}
+

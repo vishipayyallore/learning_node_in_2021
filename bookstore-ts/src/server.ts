@@ -2,7 +2,7 @@
 
 import * as dotenv from 'dotenv';
 import * as path from 'path';
-import { webApi } from './app';
+import { WebApi } from './app';
 import * as colors from 'colors';
 const mongoose = require('mongoose');
 
@@ -29,12 +29,13 @@ mongoose.connect(process.env.MongoDBCONNECTION, {
         // Connecting to the MongoDb Cloud Instance
         logMessageG(`Mongo Db Connection: ${process.env.MongoDBCONNECTION}`);
         logMessageG('Connected to MongoDb in Cloud');
-
     }
 
 });
 
-webApi.listen(PORT, () => {
+const app = new WebApi();
+
+app.webApi.listen(PORT, () => {
     logMessage(`Server Listening at port ${PORT}. http://localhost:${PORT}/api`);
 });
 
