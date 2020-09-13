@@ -2,16 +2,35 @@
 
 import * as dotenv from 'dotenv';
 import * as path from 'path';
+
 import { WebApi } from './app';
-import * as colors from 'colors';
-const mongoose = require('mongoose');
+import { ApplicationLogger } from './Utilities/application.Logger';
+import { MongoDbHelper } from './Persistence/mongoDb.Helper';
 
 // Loading Configuration from .env file.
 dotenv.config({ path: path.resolve(process.cwd(), 'src/config/appConfig.env') });
 
-logMessage(`Env Port: ${process.env.PORT}`);
+const applicationLogger = new ApplicationLogger();
+
+applicationLogger.logMessageInBlue(`Env Port: ${process.env.PORT}`);
 const PORT = process.env.PORT || 3060;
 
+const app = new WebApi();
+
+new MongoDbHelper()
+    .connectToMongoDb()
+    .then(() => {
+
+        app.webApi.listen(PORT, () => {
+            applicationLogger.logMessageInBlue(`Server Listening at port ${PORT}. http://localhost:${PORT}/api`, true);
+        });
+    })
+    .catch((error: Error) => {
+
+        applicationLogger.logMessageInRed(`Error:: Unable to connect to Mongo Database. Message:: ${error.message}`);
+    });
+
+/*
 mongoose.connect(process.env.MongoDBCONNECTION, {
 
     useNewUrlParser: true,
@@ -21,32 +40,39 @@ mongoose.connect(process.env.MongoDBCONNECTION, {
 
     if (error) {
 
-        logMessageR(`Error Connecting to Cloud MongoDb ${error}`);
+        logRedMessage(`Error Connecting to Cloud MongoDb ${error}`);
         throw new Error(error);
 
     } else {
 
         // Connecting to the MongoDb Cloud Instance
-        logMessageG(`Mongo Db Connection: ${process.env.MongoDBCONNECTION}`);
-        logMessageG('Connected to MongoDb in Cloud');
+        logGreenMessage(`Mongo Db Connection: ${process.env.MongoDBCONNECTION}`);
+        logGreenMessage('Connected to MongoDb in Cloud');
     }
 
 });
+*/
 
-const app = new WebApi();
-
-app.webApi.listen(PORT, () => {
-    logMessage(`Server Listening at port ${PORT}. http://localhost:${PORT}/api`);
-});
-
+/*
 function logMessage(message: String) {
     console.log(colors.cyan(`${new Date().toISOString()} :: ${message}`).bold);
 }
 
-function logMessageG(message: String) {
+function logGreenMessage(message: String) {
     console.log(colors.green(`${new Date().toISOString()} :: ${message}`).bold);
 }
 
-function logMessageR(message: String) {
+function logRedMessage(message: String) {
     console.log(colors.red(`${new Date().toISOString()} :: ${message}`).bold);
 }
+
+function logColoredMessage(message: String, color: colors.Color = colors.blue) {
+    console.log(color(`${new Date().toISOString()} :: ${message}`).bold);
+}
+
+applicationLogger.logMessageInCyan('Message in Cyan');
+applicationLogger.logMessageInBlue('Message in Blue');
+applicationLogger.logMessageInGreen('Message in Green');
+applicationLogger.logMessageInRed('Message in Red');
+
+*/

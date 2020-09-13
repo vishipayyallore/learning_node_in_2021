@@ -4,12 +4,18 @@ import * as dotenv from 'dotenv';
 import * as path from 'path';
 const mongoose = require('mongoose');
 
+import { ApplicationLogger } from '../Utilities/application.Logger';
+
 // Loading Configuration from .env file.
 dotenv.config({ path: path.resolve(process.cwd(), 'src/config/appConfig.env') });
 
 export class MongoDbHelper {
 
+    // TODO: Move this to Dependency Injection
+    private applicationLogger: ApplicationLogger;
+
     constructor() {
+        this.applicationLogger = new ApplicationLogger();
     }
 
     public connectToMongoDb = async () => {
@@ -23,15 +29,13 @@ export class MongoDbHelper {
 
             if (error) {
 
-                console.log(`Error Connecting to Cloud MongoDb ${error}`);
+                this.applicationLogger.logMessageInRed(`Error Connecting to Cloud MongoDb ${error}`);
                 throw new Error(error.message);
-
             } else {
 
                 // Connecting to the MongoDb Cloud Instance
-                console.log(`Mongo Db Connection: ${process.env.MongoDbConnection}`);
-                console.log('Connected to MongoDb in Cloud');
-
+                this.applicationLogger.logMessageInGreen(`Mongo Db Connection: ${process.env.MongoDbConnection}`);
+                this.applicationLogger.logMessageInGreen('Connected to MongoDb in Cloud');
             }
 
         });

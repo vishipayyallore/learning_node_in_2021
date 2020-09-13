@@ -2,24 +2,41 @@
 
 import * as express from 'express';
 
-import { morganLogger } from './middleware/logger.middleware';
 import { AppRouter } from './routes/app.Router';
+import { ApplicationLogger } from './Utilities/application.Logger';
 import { BooksRouter } from './routes/books-Router';
+import { morganLogger } from './middleware/logger.middleware';
+
 
 const APIPATH = '/api/v1';
 
 export class WebApi {
 
+    // TODO: Move this to Dependency Injection
+    private applicationLogger: ApplicationLogger;
+
     // Initialized the application
     public webApi = express();
-    
-    constructor(){
-        
-        this.initialzeMiddleware();
-        this.initializeRoutes();
+
+    constructor() {
+
+        this.initialzeMiddleware()
+            .then(() => {
+                this.initializeRoutes()
+                    .catch((error: Error) => {
+
+                        this.applicationLogger.logMessageInRed(`Error in Initializing Routes ${error}`);
+                        throw new Error(error.message);
+                    })
+            })
+            .catch((error: Error) => {
+
+                this.applicationLogger.logMessageInRed(`Error in Initializing Middleware ${error}`);
+                throw new Error(error.message);
+            });
     }
 
-    private initialzeMiddleware(){
+    private initialzeMiddleware = async () => {
 
         // express middleware to handle the json body request
         // Without json() it will be request.body === undefined
@@ -29,7 +46,7 @@ export class WebApi {
         this.webApi.use(morganLogger);
     }
 
-    private initializeRoutes(){
+    private initializeRoutes = async () => {
 
         // ******************************************** ROUTES ********************************************
         this.webApi.get('/api', (_, response) => {
