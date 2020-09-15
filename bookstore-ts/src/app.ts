@@ -64,8 +64,11 @@ export class WebApi {
     public connectToDataStore = async () => {
         const mongoDbHelper = new MongoDbHelper();
 
-        await mongoDbHelper
-            .connectToMongoDb();
+        mongoDbHelper
+            .connectToMongoDb()
+            .then(() => {
+                console.log('Is it @@@');
+            });
     }
 
     public startTheApplication = async () => {
