@@ -11,15 +11,20 @@ import { MongoDbHelper } from './Persistence/mongoDb.Helper';
 dotenv.config({ path: path.resolve(process.cwd(), 'src/config/appConfig.env') });
 
 const applicationLogger = new ApplicationLogger();
-
-applicationLogger.logMessageInBlue(`Env Port: ${process.env.PORT}`);
-const PORT = process.env.PORT || 3060;
-
 const app = new WebApi();
 
-new MongoDbHelper()
+app.connectToDataStore();
+app.startTheApplication();
+
+/*
+const mongoDbHelper = new MongoDbHelper();
+
+mongoDbHelper
     .connectToMongoDb()
     .then(() => {
+
+        applicationLogger.logMessageInBlue(`Env Port: ${process.env.PORT}`);
+        const PORT = process.env.PORT || 3060;
 
         app.webApi.listen(PORT, () => {
             applicationLogger.logMessageInBlue(`Server Listening at port ${PORT}. http://localhost:${PORT}/api`, true);
@@ -29,6 +34,7 @@ new MongoDbHelper()
 
         applicationLogger.logMessageInRed(`Error:: Unable to connect to Mongo Database. Message:: ${error.message}`);
     });
+*/
 
 /*
 mongoose.connect(process.env.MongoDBCONNECTION, {

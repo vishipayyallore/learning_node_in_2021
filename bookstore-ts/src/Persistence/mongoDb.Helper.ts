@@ -18,27 +18,29 @@ export class MongoDbHelper {
         this.applicationLogger = new ApplicationLogger();
     }
 
-    public connectToMongoDb = async () => {
+    public connectToMongoDb = () => {
 
-        await mongoose.connect(process.env.MongoDbConnection, {
-
+        mongoose.connect(process.env.MongoDbConnection, {
             useNewUrlParser: true,
             useUnifiedTopology: true
+        },
+            (error: Error) => {
 
-        }, (error: Error) => {
+                if (error) {
 
-            if (error) {
+                    this.applicationLogger.logMessageInRed(`Error Connecting to Cloud MongoDb ${error}`, true);
+                    // return Promise.reject(false);
+                    // throw new Error(error.message);
+                } else {
 
-                this.applicationLogger.logMessageInRed(`Error Connecting to Cloud MongoDb ${error}`);
-                throw new Error(error.message);
-            } else {
+                    // Connecting to the MongoDb Cloud Instance
+                    this.applicationLogger.logMessageInGreen(`Mongo Db Connection: ${process.env.MongoDbConnection}`);
+                    this.applicationLogger.logMessageInGreen('Connected to MongoDb in Cloud', true);
 
-                // Connecting to the MongoDb Cloud Instance
-                this.applicationLogger.logMessageInGreen(`Mongo Db Connection: ${process.env.MongoDbConnection}`);
-                this.applicationLogger.logMessageInGreen('Connected to MongoDb in Cloud');
-            }
+                    // return Promise.resolve(true);
+                }
 
-        });
+            });
     }
 
 }
