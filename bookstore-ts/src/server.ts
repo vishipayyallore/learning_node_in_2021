@@ -12,4 +12,7 @@ const app = new WebApi();
 app.connectToDataStore()
     .then(() => {
         app.startTheApplication();
+    })
+    .catch((error: Error) => {
+        console.log(`Unable to start the server. Message: ${error.message}`);
     });
