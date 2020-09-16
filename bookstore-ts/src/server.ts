@@ -4,17 +4,16 @@ import * as dotenv from 'dotenv';
 import * as path from 'path';
 
 import { WebApi } from './app';
-import { ApplicationLogger } from './Utilities/application.Logger';
-import { MongoDbHelper } from './Persistence/mongoDb.Helper';
 
 // Loading Configuration from .env file.
 dotenv.config({ path: path.resolve(process.cwd(), 'src/config/appConfig.env') });
 
-const applicationLogger = new ApplicationLogger();
 const app = new WebApi();
-
-app.connectToDataStore();
-app.startTheApplication();
+app.connectToDataStore()
+    .then(() => {
+        app.startTheApplication();
+    })
+// 
 
 /*
 const mongoDbHelper = new MongoDbHelper();

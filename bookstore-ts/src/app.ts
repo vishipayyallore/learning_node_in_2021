@@ -62,13 +62,23 @@ export class WebApi {
     }
 
     public connectToDataStore = async () => {
-        const mongoDbHelper = new MongoDbHelper();
 
-        mongoDbHelper
+        const mongoDbHelper = new MongoDbHelper();
+        this.applicationLogger.logMessageInYellow(`Connecting to Mongo Database`);
+
+        await mongoDbHelper
             .connectToMongoDb()
             .then(() => {
-                console.log('Is it @@@');
-            });
+
+                // Connecting to the MongoDb Cloud Instance
+                this.applicationLogger.logMessageInYellow(`Mongo Db Connection: ${process.env.MongoDbConnection}`);
+                this.applicationLogger.logMessageInYellow('Connected to MongoDb in Cloud', true);
+            })
+            .catch((error: Error) => {
+
+                this.applicationLogger.logMessageInRed(`Error Connecting to Cloud MongoDb ${error}`, true);
+                throw new Error(error.message);
+            })
     }
 
     public startTheApplication = async () => {

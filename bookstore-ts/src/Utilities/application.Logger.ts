@@ -7,6 +7,11 @@ export class ApplicationLogger {
     constructor() {
     }
 
+    public logMessageInYellow = async (message: String, bold: boolean = false) => {
+
+        await this.logMessage(message, chalk.yellowBright, bold);
+    }
+
     public logMessageInCyan = async (message: String, bold: boolean = false) => {
 
         await this.logMessage(message, chalk.cyan, bold);
