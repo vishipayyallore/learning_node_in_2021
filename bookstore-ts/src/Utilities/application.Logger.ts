@@ -33,7 +33,7 @@ export class ApplicationLogger {
     }
 
     private getLogMessage = async (message: String) => {
-        
+
         return `${new Date().toISOString()} :: ${message}`;
     }
 
@@ -42,7 +42,7 @@ export class ApplicationLogger {
         this.getLogMessage(message)
             .then(message => color(message))
             .then(message => {
-                return (bold) ?  chalk.bold(message) : message;
+                return (bold) ? chalk.bold(message) : message;
             })
             .then(message => console.log(message));
     }

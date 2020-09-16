@@ -2,8 +2,8 @@
 
 import { Request, Response, NextFunction } from 'express';
 
-import { IBook } from '../interfaces/IBook';
 import { bookModel } from '../models/book.Model';
+import { IBook } from '../interfaces/IBook';
 
 export class BooksController {
 
@@ -68,6 +68,37 @@ export class BooksController {
 
             return response.status(500).json(error);
         }
+    }
+
+    findBookById = async (request: Request, response: Response, next: NextFunction) => {
+
+        this.Book.findById(request.params.bookId, (error: Error, book: IBook) => {
+
+            if (error) {
+
+                return response
+                    .status(500)
+                    .json(`BooksController::findBookById() ==== Error while retrieving the book. Message: ${error}`);
+            }
+
+            if (book) {
+
+                // console.log(`Book Found: ${book}`);
+                request.body = book;
+                return next();
+            }
+
+            return response
+                .status(404)
+                .json();
+        });
+    }
+
+    getBookById = async (request: Request, response: Response, next: NextFunction) => {
+
+        return response
+            .status(200)
+            .json(request.body);
     }
 
 }

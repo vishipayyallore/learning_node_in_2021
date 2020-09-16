@@ -1,7 +1,7 @@
 'use strict';
 
-import * as morgan from 'morgan';
 import * as chalk from 'chalk';
+import * as morgan from 'morgan';
 
 export const morganLogger = morgan(function (tokens, req, res) {
 

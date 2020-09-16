@@ -2,11 +2,11 @@
 
 import * as express from 'express';
 
-import { AppRouter } from './routes/app.Router';
 import { ApplicationLogger } from './Utilities/application.Logger';
+import { AppRouter } from './routes/app.Router';
 import { BooksRouter } from './routes/books-Router';
-import { morganLogger } from './middleware/logger.middleware';
 import { MongoDbHelper } from './Persistence/mongoDb.Helper';
+import { morganLogger } from './middleware/logger.middleware';
 
 const APIPATH = '/api/v1';
 
