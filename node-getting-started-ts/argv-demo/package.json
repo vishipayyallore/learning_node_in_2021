@@ -4,6 +4,7 @@
     "description": "Sample for Day 4",
     "main": "index.js",
     "scripts": {
+        "build": "tsc",
         "start": "ts-node ./src/index.ts"
     },
     "author": "Viswanatha Swamy",

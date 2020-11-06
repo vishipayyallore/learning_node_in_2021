@@ -7,6 +7,7 @@
     Example: console.log(`this === module.exports === ${this === module.exports}`);
 */
 
+console.log('Process.argv ...');
 
 process.argv.forEach(argument => console.log(argument));
 
