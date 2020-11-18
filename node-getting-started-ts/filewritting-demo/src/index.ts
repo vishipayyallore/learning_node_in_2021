@@ -7,4 +7,13 @@
 
 import writeContent from './writeContent';
 
-writeContent('firstfile.txt', 'First Line !!!');
+const fileContent = `
+This is the sample file. This is second line.
+This is the sample file. This is second line.
+This is the sample file. This is second line.
+This is the sample file. This is second line.
+This is the sample file. This is second line.
+This is the sample file. This is second line.
+`;
+
+writeContent('firstfile.txt', fileContent);
