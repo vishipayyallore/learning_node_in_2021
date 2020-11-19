@@ -1,0 +1,23 @@
+{
+    "name": "filewritting-demo",
+    "version": "1.0.1",
+    "description": "Sample for Day 4",
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc",
+        "start": "ts-node ./src/index.ts"
+    },
+    "author": "Viswanatha Swamy",
+    "license": "ISC",
+    "devDependencies": {
+        "nodemon": "^2.0.4"
+    },
+    "dependencies": {
+        "@types/node": "^14.0.13",
+        "@types/prompt-sync": "^4.1.0",
+        "prompt-sync": "^4.2.0",
+        "ts-node": "^8.10.2",
+        "typescript": "^3.9.5",
+        "colors": "^1.4.0"
+    }
+}
