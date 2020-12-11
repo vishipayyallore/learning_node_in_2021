@@ -1,6 +1,7 @@
 "use strict";
 
 require('colors');
+// import colors from '../node_modules/colors/lib/colors.js';
 
 const message = `This is setTimeout's DEFAULT message.`;
 const WaitTimeOneSecond = 1000;
