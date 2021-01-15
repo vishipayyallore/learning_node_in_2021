@@ -1,0 +1,12 @@
+{
+  "name": "2.inputoutput-jsdemo",
+  "version": "1.0.1",
+  "description": "Simple Class Demo",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Viswanatha Swamy",
+  "license": "ISC"
+}
