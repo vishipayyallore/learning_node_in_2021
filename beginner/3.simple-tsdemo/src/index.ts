@@ -31,27 +31,25 @@ class MusicTeacher extends Teacher {
 
 function getTeachers(): Array<Teacher> {
     return [
-        new MusicTeacher({
-            name: 'A',
-            category: 'Music',
-            intrument: 'Guitar'
-        }),
-        new CodingTeacher({
-            name: 'B',
-            category: 'Software',
-            intrument: 'C#'
-        }),
-        new MusicTeacher({
-            name: 'C',
-            category: 'Music',
-            intrument: 'Piano'
-        }),
+        getMusicTeacher('A', 'Guitar'),
+        getCodingTeacher('B', 'Software'),
+        getMusicTeacher('A', 'Piano'),
     ];
 }
 
-const getMusicTeacher = (name, instrument) => {
+const getCodingTeacher = (name: string, programmingLanguage: string) => {
     return new MusicTeacher({
-        
+        name: name,
+        category: 'Software',
+        programmingLanguage: programmingLanguage
+    })
+};
+
+const getMusicTeacher = (name: string, instrument: string) => {
+    return new MusicTeacher({
+        name: name,
+        category: 'Music',
+        intrument: instrument
     })
 };
 
@@ -62,3 +60,15 @@ const isMusicTeacher = (teacher: Teacher): teacher is MusicTeacher => {
 console.log(JSON.stringify(getTeachers()));
 
 console.log(JSON.stringify(getTeachers().filter(isMusicTeacher)));
+
+class A {
+    public list: Array<this> = new Array<this>();
+}
+
+class B extends A { }
+
+const b: B = new B();
+console.log(b.list instanceof (new Array<B>()));
+
+const a: A = new A();
+console.log(typeof(a.list));
