@@ -2,7 +2,7 @@
     Description: 
 */
 
-const absoluteValuesSumMinimization = (numbersArray: number[]) => {
+const absoluteValuesSumMinimization = (numbersArray: number[]): number => {
 
     const isArrayLengthEven = (numbersArray.length % 2 === 0);
     const midPosition = numbersArray.length / 2;

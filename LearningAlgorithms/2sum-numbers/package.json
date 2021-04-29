@@ -1,7 +1,7 @@
 {
-  "name": "1.smallest-number-sorted-array",
+  "name": "2sum-numbers",
   "version": "1.0.1",
-  "description": "Simple Demo to find the Smallest Median Number from Sorted Array",
+  "description": "Sum all the numbers given as input",
   "main": "index.js",
   "scripts": {
     "build": "tsc",

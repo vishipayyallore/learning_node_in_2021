@@ -1,7 +1,7 @@
 {
-  "name": "1.simpleclass-tsdemo",
+  "name": "1smallest-number-sorted-array",
   "version": "1.0.1",
-  "description": "Simple Class Demo",
+  "description": "Simple Demo to find the Smallest Median Number from Sorted Array",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
