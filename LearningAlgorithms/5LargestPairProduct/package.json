@@ -1,0 +1,21 @@
+{
+  "name": "4add-two-digits",
+  "version": "1.0.1",
+  "description": "Adding Sum of two digits",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node ./src/index.ts"
+  },
+  "author": "Viswanatha Swamy",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^14.0.13",
+    "@types/prompt-sync": "^4.1.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

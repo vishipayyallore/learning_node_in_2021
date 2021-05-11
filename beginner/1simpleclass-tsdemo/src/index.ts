@@ -19,5 +19,6 @@ const person = {
 
 console.log(`AZ 900: ${person.certifications?.az900}`);
 console.log(`AZ 104: ${person.certifications?.az104}`);
-// console.log(`AZ 204: ${person.certifications?.az204}`); // ***** Need to verify why chaining operator does not work.
+// @ts-ignore
+console.log(`AZ 204: ${person.certifications?.az204}`); 
 console.log(`${JSON.stringify(person)}`);
