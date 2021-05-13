@@ -1,6 +1,5 @@
 /*
-    Concepts: 
-        1. process.stdin | 2. process.stdout | 3. process.stderr
+    Concepts: 1. process.stdin | 2. process.stdout | 3. process.stderr
 */
 
 console.log(`Enter Name. OR Press "CTRL + C" to EXIT.`);
