@@ -25,4 +25,4 @@ console.log(longestStrings(["aa", "a", "ad", "b"]));
 console.log(longestStrings(["aba", "aa", "ad", "vcd", "aba"]));
 console.log(longestStrings(["aba", "aa", "ad", "dddd", "vcd", "aba", "abcd"]));
 console.log(longestStrings(["eeee", "aba", "aa", "aaaaa", "ad", "dddd", "vcd", "aba", "abcd"]));
-
+console.log(longestStrings(["", "aa", "a", "ad", "b", "ccc", "dddd", "eeeee", "     " ]));
