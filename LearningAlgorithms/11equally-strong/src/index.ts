@@ -25,7 +25,8 @@ const performAreEquallyStrong = (values: number[][]) => {
 const values = [
     [10, 15, 15, 10],
     [15, 10, 15, 10],
-    [15, 10, 15, 9]
+    [15, 10, 15, 9],
+    [20, 20, 20, 20]
 ];
 performAreEquallyStrong(values);
 

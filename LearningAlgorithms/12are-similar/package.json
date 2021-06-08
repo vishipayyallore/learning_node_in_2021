@@ -1,0 +1,21 @@
+{
+  "name": "12are-similar",
+  "version": "1.0.1",
+  "description": "Adding Sum of two digits",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node ./src/index.ts"
+  },
+  "author": "Viswanatha Swamy",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^14.17.1",
+    "@types/prompt-sync": "^4.1.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.9"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
